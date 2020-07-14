@@ -1,29 +1,30 @@
 <template>
   <div class="weather-container">
-    hello
+    hello, current temp is: {{ weather.current.temp }}
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Weather',
-  props: {}
+  props: {},
+  data() {
+    return {
+      weather: {}
+    };
+  },
+  methods: {},
+  created: function () {
+      'method': 'GET'
+    }).then(response => {
+      return response.json();
+    }).then(data => {
+      this.weather = data;
+    })
+  }
 }
 </script>
 
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+<style lang="scss" scoped>
+</style> 
