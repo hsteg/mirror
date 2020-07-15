@@ -10,7 +10,7 @@
           hourly weather
         </div>
         <div class="daily">
-          daily weather
+          <FutureDay v-for="day in nextFiveDaysWeather" :key="day.dt" v-bind:dayWeather="day" />
         </div>  
       </div>
     </div>
@@ -20,13 +20,15 @@
 <script>
 import Loading from '../Loading';
 import CurrentWeather from './Current';
+import FutureDay from './FutureDay';
 
 export default {
   name: 'Weather',
   props: {},
   components: {
     Loading,
-    CurrentWeather
+    CurrentWeather,
+    FutureDay
   },
   data() {
     return {
@@ -35,7 +37,9 @@ export default {
     };
   },
   computed: {
-    
+    nextFiveDaysWeather: function () {
+      return this.weather.daily.slice(1,6);
+    }
   },
   methods: {},
   created: function () {
@@ -75,7 +79,10 @@ export default {
         }
 
         .daily {
-          height: 50%
+          height: 50%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
         }
       }
     }
