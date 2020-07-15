@@ -4,9 +4,7 @@
       <Loading/>
     </div>
     <div v-if="!isLoading" class="weather-container">
-      <div class="current-weather">
-        current weather is {{ weather.current.feels_like }}
-      </div>
+      <CurrentWeather v-bind:weather="weather"/>
       <div class="future-weather">
         <div class="hourly">
           hourly weather
@@ -20,13 +18,15 @@
 </template>
 
 <script>
-import Loading from './Loading';
+import Loading from '../Loading';
+import CurrentWeather from './Current';
 
 export default {
   name: 'Weather',
   props: {},
   components: {
-    Loading
+    Loading,
+    CurrentWeather
   },
   data() {
     return {
@@ -34,9 +34,13 @@ export default {
       isLoading: false
     };
   },
+  computed: {
+    
+  },
   methods: {},
   created: function () {
     this.isLoading = true;
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=40.7311045&lon=-73.9560627&appid=&units=imperial', {
       'method': 'GET'
     }).then(response => {
       return response.json();
@@ -59,10 +63,6 @@ export default {
       border: solid 1px #e3e3e3;
       display: grid;
       grid-template-columns: 1fr 2fr;
-
-      .current-weather {
-        box-shadow: 1px 0 0 #404040;
-      }
 
       .future-weather {
         display: flex;
