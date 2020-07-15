@@ -4,7 +4,7 @@
       <Loading/>
     </div>
     <div v-if="!isLoading" class="weather-container">
-      <CurrentWeather v-bind:weather="weather"/>
+      <CurrentWeather v-bind:currentWeather="weather.current"/>
       <div class="future-weather">
         <div class="hourly">
           hourly weather
