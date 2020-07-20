@@ -22,6 +22,8 @@ import Loading from '../Loading';
 import CurrentWeather from './Current';
 import FutureDay from './FutureDay';
 
+import client from '../../services/httpClient';
+
 export default {
   name: 'Weather',
   props: {},
@@ -41,17 +43,17 @@ export default {
       return this.weather.daily.slice(1,6);
     }
   },
-  methods: {},
-  created: function () {
-    this.isLoading = true;
-    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=40.7311045&lon=-73.9560627&appid=&units=imperial', {
-      'method': 'GET'
-    }).then(response => {
-      return response.json();
-    }).then(data => {
-      this.isLoading = false;
-      this.weather = data;
-    })
+  methods: {
+    async getWeatherData() {
+      this.isLoading = true;
+      client.getWeather().then( data => {
+        this.isLoading = false;
+        this.weather = data;
+      })
+    }
+  },
+  created() {
+    this.getWeatherData();
   }
 }
 </script>

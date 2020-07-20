@@ -16,7 +16,6 @@ export default {
       let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   
       let day = days[date.getDay()];
-      console.log(date);
       return day;
     }
   }
