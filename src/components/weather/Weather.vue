@@ -1,20 +1,13 @@
-<template>
-  <div id="weather">
-    <div v-if="isLoading">
-      <Loading/>
-    </div>
-    <div v-if="!isLoading" class="weather-container">
-      <CurrentWeather v-bind:currentWeather="weather.current"/>
-      <div class="future-weather">
-        <div class="hourly">
-          hourly weather
-        </div>
-        <div class="daily">
-          <FutureDay v-for="day in nextFiveDaysWeather" :key="day.dt" v-bind:dayWeather="day" />
-        </div>  
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  #weather
+    .loading(v-if="isLoading")
+      loading
+    .weather-container(v-if="!isLoading")
+      current-weather(:currentWeather="weather.current")
+      .future-weather
+        .hourly hourly weather
+        .daily
+          future-day(v-for="day in nextFiveDaysWeather" :key="day.dt", :dayWeather="day")
 </template>
 
 <script>
@@ -28,9 +21,9 @@ export default {
   name: 'Weather',
   props: {},
   components: {
-    Loading,
-    CurrentWeather,
-    FutureDay
+    'loading': Loading,
+    'current-weather': CurrentWeather,
+    'future-day': FutureDay
   },
   data() {
     return {

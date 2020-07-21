@@ -1,7 +1,5 @@
-<template>
-  <div class="day">
-    {{ formattedDayOfTheWeek }} {{ dayWeather.temp.max }} / {{ dayWeather.temp.min }}
-  </div>
+<template lang="pug">
+  .day {{ formattedDayOfTheWeek }} {{ dayWeather.temp.max }} / {{ dayWeather.temp.min }}
 </template>
 
 <script>

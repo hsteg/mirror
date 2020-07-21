@@ -1,16 +1,13 @@
-<template>
-  <div id="transit">
-    <div v-if="isLoading">
-      <Loading/>
-    </div>
-    <div v-if="!isLoading" class="transit-container">
-      <GreenpointAveTrains 
-        v-bind:trainTimes="greenpointAveTimes" 
-        v-bind:timeDifference="timeDifference" 
-        v-bind:headerText="'Greenpoint Ave. Subway'"
-      />
-    </div>
-  </div>
+<template lang="pug">
+  #transit
+    .loading(v-if="isLoading")
+      loading
+    .transit-container(v-if="!isLoading")
+      greenpoint-ave-trains(
+        :trainTimes="greenpointAveTimes"
+        :timeDifference="timeDifference"
+        :headerText="'Greenpoint Ave. Subway'"
+      )
 </template>
 
 <script>
@@ -21,8 +18,8 @@ import GreenpointAveTrains from './GreenpointAveTrains';
 export default {
   name: 'Transit',
   components: {
-    Loading,
-    GreenpointAveTrains
+    'loading': Loading,
+    'greenpoint-ave-trains': GreenpointAveTrains
   },
   data() {
     return {

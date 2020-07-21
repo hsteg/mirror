@@ -1,26 +1,16 @@
-<template>
-  <div class="current-weather">
-    <div class="temperature">
-      <div class="real-feel">
-        {{ formattedRealFeel }}
-      </div>
-      <div class="air-temp">
-        {{ formattedAirTemp }}
-      </div>
-    </div>
-    <div class="sky-conditions">
-      <img v-bind:src="iconSrc">
-      <p>
-        {{ formattedWeatherConditions }}
-      </p>
-    </div>
-    <div class="other-conditions">
-      <p>{{ formattedHumidity }}</p>
-      <p>{{ formattedUvIndex }}</p>
-      <p>{{ formattedWindSpeed }}</p>
-      <p>{{ formattedCloudCover }}</p>
-    </div>
-  </div>
+<template lang="pug">
+  .current-weather
+    .temperature
+      .real-feel {{ formattedRealFeel }}
+      .air-temp {{ formattedAirTemp }}
+    .sky-conditions
+      img(:src="iconSrc")
+      p {{ formattedWeatherConditions }}
+    .other-conditions
+      p {{ formattedHumidity }}
+      p {{ formattedUvIndex }}
+      p {{ formattedWindSpeed }}
+      p {{ formattedCloudCover }}
 </template>
 
 <script>

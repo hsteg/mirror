@@ -1,18 +1,11 @@
-<template>
-  <div class="greenpoint-ave-trains">
-    <div class="header">
-      <img src="https://new.mta.info/themes/custom/bootstrap_mta/images/icons/G.svg">
-      <h1>
-        {{ headerText }}
-      </h1>
-    </div>
+<template lang="pug">
+  .greenpoint-ave-trains
+    .header
+      img(:src="'https://new.mta.info/themes/custom/bootstrap_mta/images/icons/G.svg'")
+      h1 {{ headerText }}
 
-    <div class="train-times">
-      <div v-for="departure in trainTimes" :key="departure.time">
-        {{ translator[departure.destinationStationId] }} {{ timeDifference(departure.time) }}
-      </div>
-    </div>
-  </div>
+    .train-times(v-for="departure in trainTimes" :key="departure.time")
+      .train-time {{ translator[departure.destinationStationId] }} {{ timeDifference(departure.time) }}
 </template>
 
 <script>
