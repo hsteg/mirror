@@ -1,11 +1,17 @@
 <template lang="pug">
   .greenpoint-ave-trains
     .header
-      img(:src="'https://new.mta.info/themes/custom/bootstrap_mta/images/icons/G.svg'")
       h1 {{ headerText }}
 
-    .train-times(v-for="departure in trainTimes" :key="departure.time")
-      .train-time {{ translator[departure.destinationStationId] }} {{ timeDifference(departure.time) }}
+    .train-times
+      .train-time(v-for="departure in trainTimes" :key="departure.time")
+        .destination-station
+          img.not-mta-icon(:src="'https://new.mta.info/themes/custom/bootstrap_mta/images/icons/G.svg'")
+          h2 {{ translator[departure.destinationStationId] }} 
+        .arrival-time
+          h2 {{ timeDifferenceInMin(departure.time) }}
+          p min
+      p.last-updated Last updated: {{ lastUpdated }}
 </template>
 
 <script>
@@ -13,8 +19,9 @@ export default {
   name: 'GreenpointAveTrains',
   props: {
     headerText: String,
-    timeDifference: Function,
-    trainTimes: Array
+    timeDifferenceInMin: Function,
+    trainTimes: Array,
+    lastUpdated: String
   },
   data() {
     return {
@@ -27,7 +34,7 @@ export default {
   computed: {
     formattedDepartures: function () {
       return this.trainTimes.map(departureObject => {      
-        return this.timeDifference(departureObject.time);
+        return this.timeDifferenceInMin(departureObject.time);
       })
     }
   }
@@ -35,7 +42,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  h1 {
-    display: inline-block;
+  .greenpoint-ave-trains {
+    padding: 20px;
+      
+    h1, h2, p {
+      display: inline-block;
+      margin: 0;
+    }
+    
+    .header {
+      margin-bottom: 20px;
+    }
+
+    .train-times {
+      h2 {
+        font-size: 28px;
+      }
+      .train-time {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid white;
+        
+        &:last-child {
+          border-bottom: 1px solid white;
+        }
+
+        .destination-station {
+          display: flex;
+          align-items: center;
+          
+          .not-mta-icon {
+            margin-right: 5px;
+          }
+        }
+
+        .arrival-time {
+          display: flex;
+          align-items: baseline;
+        }
+      }
+
+      .last-updated {
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+
   }
 </style>
