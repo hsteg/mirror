@@ -9,19 +9,22 @@
         :headerText="'Greenpoint Avenue Station'"
         :lastUpdated="trainsLastUpdated"
       )
+      buses
 </template>
 
 <script>
 import client from '../../services/httpClient';
 import Loading from '../Loading';
 import GreenpointAveTrains from './GreenpointAveTrains';
+import Buses from './Buses';
 
 
 export default {
   name: 'Transit',
   components: {
     'loading': Loading,
-    'greenpoint-ave-trains': GreenpointAveTrains
+    'greenpoint-ave-trains': GreenpointAveTrains,
+    'buses': Buses
   },
   data() {
     return {
@@ -80,10 +83,11 @@ export default {
       border-radius: 15px;
       border: solid 1px #e3e3e3;
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1fr 1fr;
     
       @media (max-width: 767px) {
         display: flex;    
+        flex-direction: column;
       }
     }
 
