@@ -63,7 +63,7 @@ export default {
         justify-content: space-between;
         border-top: 1px solid white;
         
-        &:last-child {
+        &:last-of-type {
           border-bottom: 1px solid white;
         }
 
