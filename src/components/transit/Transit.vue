@@ -26,6 +26,7 @@ export default {
       transit: {},
       isLoading: false,
       timer: ''
+      trainsLastUpdated: '',
     };
   },
   created() {
@@ -60,6 +61,7 @@ export default {
       });
     },
     timeDifference(departure) {
+      this.trainsLastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       const nowTime = new Date(Date.now()).getTime();
       const departureTime = new Date(departure * 1000).getTime();
       const difference = ( ( (departureTime - nowTime) / 1000) / 60);
