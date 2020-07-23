@@ -6,7 +6,7 @@
     .train-times
       .train-time(v-for="departure in trainTimes" :key="departure.time")
         .destination-station
-          img.not-mta-icon(:src="'https://new.mta.info/themes/custom/bootstrap_mta/images/icons/G.svg'")
+          p G
           h2 {{ translator[departure.destinationStationId] }} 
         .arrival-time
           h2 {{ timeDifferenceInMin(departure.time) }}
@@ -71,8 +71,17 @@ export default {
           display: flex;
           align-items: center;
           
-          .not-mta-icon {
-            margin-right: 5px;
+          p {
+          font-size: 20px;
+          font-weight: 600;
+          margin-right: 5px;
+          border-radius: 30px;
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          text-align: center;
+          background-color: #6CBE45;
+          color: white;
           }
         }
 
