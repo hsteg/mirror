@@ -10,6 +10,7 @@
         :lastUpdated="trainsLastUpdated"
       )
       buses
+      subway-status
 </template>
 
 <script>
@@ -17,6 +18,7 @@ import client from '../../services/httpClient';
 import Loading from '../Loading';
 import GreenpointAveTrains from './GreenpointAveTrains';
 import Buses from './Buses';
+import SubwayStatus from './SubwayStatus';
 
 
 export default {
@@ -24,19 +26,20 @@ export default {
   components: {
     'loading': Loading,
     'greenpoint-ave-trains': GreenpointAveTrains,
-    'buses': Buses
+    'buses': Buses,
+    'subway-status': SubwayStatus
   },
   data() {
     return {
       transit: {},
       isLoading: false,
       timer: '',
-      trainsLastUpdated: '',
+      trainsLastUpdated: ''
     };
   },
   created() {
     this.getTransitData();
-    this.timer = setInterval(this.getTransitData, 45000);
+    // this.timer = setInterval(this.getTransitData, 5000);
   },
   beforeDestroy() {
     this.cancelAutoUpdate();
