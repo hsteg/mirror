@@ -1,12 +1,12 @@
 <template lang="pug">
   .bus-stop
     h2.stop-name {{ busStop.name }}
-    .no-buses(v-if="noStopData") No buses en-route
-    .arrival-info(v-else v-for="arrival in busStop.data" :key="arrival.expectedArrivalTime")
+    p.no-buses(v-if="noStopData") No buses en-route
+    .transit-data-row(v-else v-for="arrival in busStop.data" :key="arrival.expectedArrivalTime")
       .distance 
         h2.number {{ arrival.readableDistanceNumber }} 
-        .units {{ arrival.readableDistanceUnits }}
-      .time 
+        p.units {{ arrival.readableDistanceUnits }}
+      .arrival-time 
         h2.number-min {{ -1 * (moment().diff(arrival.expectedArrivalTime, 'minutes')) }} 
         p.min min
     p.last-updated Last updated: {{ busStop.lastUpdated }}
@@ -34,39 +34,25 @@ export default {
       margin-bottom: 5px;
     }
 
-    h2, p {
-      display: inline-block;
-      margin: 0;
-    }
-
-    .arrival-info {
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid white;
-        
-      &:last-of-type {
-        border-bottom: 1px solid white;
-      }
-
+    .transit-data-row {
       .distance {
         display: flex;
         align-items: baseline;
+
+        .units {
+          margin: 0;
+        }
       }
 
-      .time {
-        display: flex;
-        align-items: baseline;
-
+      .arrival-time {
         .number-min {
           font-size: 28px;
         }
+        
+        .min {
+          margin: 0;
+        }
       }
-    }
-
-    .last-updated {
-      width: 100%;
-      text-align: center;
-      font-size: 14px;
     }
   }
 </style>

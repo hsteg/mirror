@@ -1,7 +1,6 @@
 <template lang="pug">
-  .buses 
-    .header
-      h1 Bus Times
+  .buses.transit-section
+    h1.transit-header Bus Times
     bus-stop(
       v-for="busStop in busData"
       :key="busStop.name"
@@ -75,16 +74,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .buses {
-    padding: 20px;
-
-    h1 {
-      display: inline-block;
-      margin: 0;
-    }
-
-    .header {
-      margin-bottom: 20px;
-    }
-  }
 </style>

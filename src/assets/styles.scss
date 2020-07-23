@@ -1,0 +1,47 @@
+#transit {
+  .transit-section {
+    padding: 20px;
+  }
+  h1, h2 {
+    display: inline-block;
+    margin: 0;
+  }
+  
+  .transit-header {
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+  
+  p.subway-line{
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 5px;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+  }
+
+  .transit-data-row {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid white;
+
+    &:last-of-type {
+      border-bottom: 1px solid white;
+    }
+
+    .arrival-time {
+      display: flex;
+      align-items: baseline;
+    }
+  }
+
+  .last-updated {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+  }
+}

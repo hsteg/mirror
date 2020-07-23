@@ -2,7 +2,7 @@
   #transit
     .loading(v-if="isLoading")
       loading
-    .transit-container(v-if="!isLoading")
+    .transit-main(v-if="!isLoading")
       greenpoint-ave-trains(
         :trainTimes="transit.slice(0,10)"
         :timeDifferenceInMin="timeDifferenceInMin"
@@ -81,7 +81,7 @@ export default {
   #transit {
     width: 100%;
 
-    .transit-container {
+    .transit-main {
       width: 100%;
       border-radius: 15px;
       border: solid 1px #e3e3e3;

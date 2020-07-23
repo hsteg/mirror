@@ -18,7 +18,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import './assets/styles.scss';
+
 body {
   background: #2e2e2e;
 }
@@ -26,7 +28,6 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #e3e3e3;
 }
 </style>
