@@ -1,21 +1,19 @@
 <template lang="pug">
   #weather
-    .loading(v-if="isLoading")
-      loading
-    .weather-container(v-if="!isLoading")
-      current-weather(:currentWeather="weather.current")
-      .future-weather
-        .hourly hourly weather
-        .daily
-          future-day(v-for="day in nextFiveDaysWeather" :key="day.dt", :dayWeather="day")
+    .weather-main
+      current-weather
+      //- .future-weather
+      //-   .hourly hourly weather
+      //-   .daily
+      //-     future-day(v-for="day in nextFiveDaysWeather" :key="day.dt", :dayWeather="day")
 </template>
 
 <script>
 import Loading from '../Loading';
 import CurrentWeather from './Current';
-import FutureDay from './FutureDay';
+import Hourly from './Hourly';
 
-import client from '../../services/httpClient';
+
 
 export default {
   name: 'Weather',
@@ -23,31 +21,15 @@ export default {
   components: {
     'loading': Loading,
     'current-weather': CurrentWeather,
-    'future-day': FutureDay
+    'hourly-weather': Hourly
   },
   data() {
     return {
       weather: {},
-      isLoading: false
     };
   },
-  computed: {
-    nextFiveDaysWeather: function () {
-      return this.weather.daily.slice(1,6);
-    }
-  },
-  methods: {
-    async getWeatherData() {
-      this.isLoading = true;
-      client.getWeather().then( data => {
-        this.isLoading = false;
-        this.weather = data;
-      })
-    }
-  },
-  created() {
-    this.getWeatherData();
-  }
+  computed: {},
+  methods: {}
 }
 </script>
 
@@ -55,30 +37,17 @@ export default {
   #weather {
     width: 100%;
 
-    .weather-container {
+    .weather-main {
       width: 100%;
       height: 500px;
       border-radius: 15px;
       border: solid 1px #e3e3e3;
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1fr 1fr;
 
-      .future-weather {
-        display: flex;
+      @media (max-width: 767) {
+        display: flex;    
         flex-direction: column;
-        justify-content: space-evenly;
-
-        .hourly {
-          height: 50%;
-          box-shadow: 0 1px 0 #404040;
-        }
-
-        .daily {
-          height: 50%;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-evenly;
-        }
       }
     }
   }

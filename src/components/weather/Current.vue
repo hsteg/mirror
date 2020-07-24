@@ -1,51 +1,89 @@
 <template lang="pug">
-  .current-weather
+  loading(v-if="isLoading")
+  .current-weather.weather-section(v-else)
     .temperature
       .real-feel {{ formattedRealFeel }}
       .air-temp {{ formattedAirTemp }}
-    .sky-conditions
-      img(:src="iconSrc")
-      p {{ formattedWeatherConditions }}
     .other-conditions
-      p {{ formattedHumidity }}
-      p {{ formattedUvIndex }}
-      p {{ formattedWindSpeed }}
       p {{ formattedCloudCover }}
+      p {{ formattedHumidity }}
+      p {{ formattedMoonPhase }}
+      p {{ formattedPrecipitation }}
+      p {{ formattedPrecipitationType }}
+      p {{ formattedSunrise }}
+      p {{ formattedSunset }}
+      p {{ formattedWindGust }}
+      p {{ formattedWindSpeed }}
 </template>
 
 <script>
+import client from '../../services/httpClient';
+import Loading from '../Loading';
+
 export default {
   name: 'CurrentWeather',
-  props: {
-    currentWeather: Object
+  components: {
+    'loading': Loading
   },
+  data() {
+    return {
+      currentWeatherData: {},
+      isLoading: false,
+    };
+  },
+  created() {
+    // this.getWeatherData();
+  }, 
   computed: {
     formattedRealFeel: function () {
-      return `${Math.round(this.currentWeather.feels_like)}°`;
+      return `${Math.round(this.currentWeatherData.feels_like.value)}°`;
     },
     formattedAirTemp: function () {
-      return `Air Temp: ${Math.round(this.currentWeather.temp)}°`;
+      return `Air Temp: ${Math.round(this.currentWeatherData.temp.value)}°`;
     },
-    iconSrc: function () {
-      return `http://openweathermap.org/img/wn/${this.currentConditions.icon}@4x.png`
-    },
-    currentConditions: function () {
-      return this.currentWeather.weather[0];
-    },
-    formattedWeatherConditions: function () {
-      return `${this.currentConditions.main} - ${this.currentConditions.description}`
-    },
+    // iconSrc: function () {
+    //   return `http://openweathermap.org/img/wn/${this.currentConditions.icon}@4x.png`
+    // },
     formattedHumidity: function () {
-      return `Humidity: ${this.currentWeather.humidity}%`
-    },
-    formattedUvIndex: function () {
-      return `UV Index: ${this.currentWeather.uvi}`
+      return `Humidity: ${this.currentWeatherData.humidity.value}%`
     },
     formattedWindSpeed: function () {
-      return `Wind Speed: ${Math.round(this.currentWeather.wind_speed)}`
+      // i have the wind direction too now
+      // also visibility, weather_code: mostly_cloudy, 
+      return `Wind Speed: ${Math.round(this.currentWeatherData.wind_speed.value)}`
+    },
+    formattedWindGust: function () {
+      return `Wind Gusts: ${Math.round(this.currentWeatherData.wind_gust.value)}`
     },
     formattedCloudCover: function () {
-      return `Cloud Cover: ${this.currentWeather.clouds}%`
+      return `Cloud Cover: ${this.currentWeatherData.cloud_cover.value}%`
+    },
+    formattedMoonPhase: function () {
+     return `Moon Phase: ${this.currentWeatherData.moon_phase.value}` ;
+    },
+    formattedPrecipitationType: function () {
+      return `Precipitation Type: ${this.currentWeatherData.precipitation_type.value}` ;
+    },
+    formattedPrecipitation: function () {
+      return `Precipitation: ${this.currentWeatherData.precipitation.value}` ;
+    },
+    formattedSunrise: function () {
+      return `Sunrise: ${this.currentWeatherData.sunrise.value}` ;
+    },
+    formattedSunset: function () {
+      return `Sunset: ${this.currentWeatherData.sunset.value}` ;
+    },
+
+
+
+  },
+  methods: {
+    async getWeatherData() {
+      this.isLoading = true;
+      client.getWeather().then( data => {
+        this.isLoading = false;
+        this.currentWeatherData = data;
+      })
     }
   }
 }
@@ -71,13 +109,6 @@ export default {
         text-align: center;
       }
     }
-
-    .sky-conditions {
-      p {
-        margin-top: -60px;
-        text-align: center;
-      }
-    } 
 
     .other-conditions {
       p {
