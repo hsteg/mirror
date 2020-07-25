@@ -91,7 +91,6 @@ export default {
 
 <style lang="scss" scoped>
   .current-weather {
-    box-shadow: 1px 0 0 #404040;
     display: flex;
     flex-direction: column;
     align-items: center;

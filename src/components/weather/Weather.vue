@@ -2,16 +2,15 @@
   #weather
     .weather-main
       current-weather
-      //- .future-weather
-      //-   .hourly hourly weather
-      //-   .daily
-      //-     future-day(v-for="day in nextFiveDaysWeather" :key="day.dt", :dayWeather="day")
+      hourly-weather
+      daily-weather
 </template>
 
 <script>
 import Loading from '../Loading';
 import CurrentWeather from './Current';
 import Hourly from './Hourly';
+import Daily from './Daily';
 
 
 
@@ -21,7 +20,8 @@ export default {
   components: {
     'loading': Loading,
     'current-weather': CurrentWeather,
-    'hourly-weather': Hourly
+    'hourly-weather': Hourly,
+    'daily-weather': Daily
   },
   data() {
     return {
@@ -39,13 +39,12 @@ export default {
 
     .weather-main {
       width: 100%;
-      height: 500px;
       border-radius: 15px;
       border: solid 1px #e3e3e3;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
 
-      @media (max-width: 767) {
+      @media (max-width: 767px) {
         display: flex;    
         flex-direction: column;
       }

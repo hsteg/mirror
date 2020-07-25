@@ -45,3 +45,19 @@
     font-size: 14px;
   }
 }
+
+#weather {
+  h1, h2 {
+    display: inline-block;
+    margin: 0;
+  }
+
+  .weather-section {
+    padding: 20px;
+    
+    .weather-header {
+      margin-bottom: 20px;
+    }  
+  }
+
+}
