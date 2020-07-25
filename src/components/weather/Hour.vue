@@ -37,7 +37,7 @@ export default {
       return `Precipitation Type: ${this.precipitationType}` ;
     },
     formattedTimestamp: function () {
-      return this.moment(this.timestamp).format("hh:mm a");
+      return this.moment(this.timestamp).format("h a");
     }
   }
 }
@@ -45,14 +45,12 @@ export default {
 
 <style lang="scss" scoped>
   .hour {
-    display: flex;
-    justify-content: space-between;
-
     .temperature {
       display: flex;
       align-items: center;
       .real-feel {
         font-size: 26px;
+        font-weight: 600;
       }
     }
   }

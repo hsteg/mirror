@@ -58,6 +58,16 @@
     .weather-header {
       margin-bottom: 20px;
     }  
+
+    .weather-data-row {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid white;
+
+      &:last-of-type {
+        border-bottom: 1px solid white;
+      }
+    }
   }
 
 }

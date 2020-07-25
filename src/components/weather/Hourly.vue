@@ -2,7 +2,7 @@
   loading(v-if="isLoading")
   .hour-weather.weather-section(v-else)
     h1.weather-header Hourly
-    hour(
+    hour.weather-data-row(
       v-for="hour in hourlyWeatherData"
       :key="hour.observation_time.value"
       :realFeel="hour.feels_like.value"

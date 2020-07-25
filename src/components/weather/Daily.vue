@@ -2,21 +2,47 @@
 loading(v-if="isLoading")
 .daily-weather.weather-section(v-else)
   h1.weather-header Daily
-  h1 {{ this.moment().add(7, 'd').toISOString() }}
+  day.weather-data-row(
+    v-for="day in dailyWeatherData"
+    :key="day.observation_time.value"
+    :realFeel="day.feels_like"
+    :timestamp="day.observation_time.value"
+    :precipitationProbability="day.precipitation_probability.value"
+    :sunrise="day.sunrise.value"
+    :sunset="day.sunset.value"
+    :airTemp="day.temp"
+    :weatherCode="day.weather_code.value"
+  )
+  
 </template>
 
 <script>
+import client from '../../services/httpClient';
 import Loading from '../Loading';
+import Day from './Day';
 
 export default {
   name: "DailyWeather",
   components: {
     'loading': Loading,
-    // 'day': Day
+    'day': Day
   },
   data() {
     return {
       isLoading: false,
+      // dailyWeatherData: [],
+    }
+  },
+  created() {
+    // this.getDailyWeatherData();
+  },
+  methods: {
+    async getDailyWeatherData() {
+      this.isLoading = true;
+      client.getWeatherDaily().then( data => {
+        this.isLoading = false;
+        this.dailyWeatherData = data;
+      })
     }
   }
 }
