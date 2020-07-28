@@ -13,6 +13,7 @@ loading(v-if="isLoading")
     :airTemp="day.temp"
     :weatherCode="day.weather_code.value"
   )
+  p.last-updated Last updated: {{ lastUpdated }}
   
 </template>
 
@@ -30,11 +31,12 @@ export default {
   data() {
     return {
       isLoading: false,
-      // dailyWeatherData: [],
+      lastUpdated: '',
+      dailyWeatherData: []
     }
   },
   created() {
-    // this.getDailyWeatherData();
+    this.getDailyWeatherData();
   },
   methods: {
     async getDailyWeatherData() {
@@ -42,6 +44,7 @@ export default {
       client.getWeatherDaily().then( data => {
         this.isLoading = false;
         this.dailyWeatherData = data;
+        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
     }
   }

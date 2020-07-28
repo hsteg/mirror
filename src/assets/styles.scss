@@ -38,12 +38,6 @@
       align-items: baseline;
     }
   }
-
-  .last-updated {
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-  }
 }
 
 #weather {
@@ -69,5 +63,10 @@
       }
     }
   }
+}
 
+.last-updated {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
 }

@@ -14,6 +14,8 @@
       p {{ formattedSunset }}
       p {{ formattedWindGust }}
       p {{ formattedWindSpeed }}
+    p.last-updated Last updated: {{ lastUpdated }}
+
 </template>
 
 <script>
@@ -23,16 +25,17 @@ import Loading from '../Loading';
 export default {
   name: 'CurrentWeather',
   components: {
-    'loading': Loading
+    'loading': Loading,
   },
   data() {
     return {
       currentWeatherData: {},
       isLoading: false,
+      lastUpdated: ''
     };
   },
   created() {
-    // this.getWeatherData();
+    this.getWeatherData();
   }, 
   computed: {
     formattedRealFeel: function () {
@@ -83,6 +86,7 @@ export default {
       client.getWeather().then( data => {
         this.isLoading = false;
         this.currentWeatherData = data;
+        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
     }
   }

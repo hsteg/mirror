@@ -11,6 +11,7 @@
       :precipitationType="hour.precipitation_type.value"
       :timestamp="hour.observation_time.value"
       )
+    p.last-updated Last updated: {{ lastUpdated }}
 </template>
 
 <script>
@@ -27,213 +28,12 @@ export default {
   data() { 
     return {
       isLoading: false,
-      // hourlyWeatherData: [],
-      hourlyWeatherData: [
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":73.93,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":73.93,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T03:00:00.000Z"
-            }
-        },
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":73.01,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":73.01,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T04:00:00.000Z"
-            }
-        },
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":72.29,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":72.29,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T05:00:00.000Z"
-            }
-        },
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":71.64,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":71.64,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T06:00:00.000Z"
-            }
-        },
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":71.26,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":71.26,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T07:00:00.000Z"
-            }
-        },
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":70.98,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":70.98,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T08:00:00.000Z"
-            }
-        },
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":69.97,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":69.97,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T09:00:00.000Z"
-            }
-        },
-        {
-            "lon":-73.9560627,
-            "lat":40.7311045,
-            "temp":{
-              "value":69.33,
-              "units":"F"
-            },
-            "precipitation_type":{
-              "value":"none"
-            },
-            "precipitation_probability":{
-              "value":0,
-              "units":"%"
-            },
-            "feels_like":{
-              "value":69.33,
-              "units":"F"
-            },
-            "weather_code":{
-              "value":"clear"
-            },
-            "observation_time":{
-              "value":"2020-07-25T10:00:00.000Z"
-            }
-        }
-      ]
+      lastUpdated: '',
+      hourlyWeatherData: []
     }
   },
   created() {
-    // this.getHourlyWeatherData();
+    this.getHourlyWeatherData();
   },
   computed: {},
   methods: {
@@ -242,6 +42,7 @@ export default {
       client.getWeatherHourly().then( data => {
         this.isLoading = false;
         this.hourlyWeatherData = data;
+        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
     }
   },
