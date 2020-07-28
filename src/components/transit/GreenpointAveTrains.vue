@@ -1,10 +1,12 @@
 <template lang="pug">
-  .greenpoint-ave-trains.transit-section
-    h1.transit-header {{ headerText }}
-    .transit-data-row(v-for="departure in trainTimes" :key="departure.time")
+  .loading(v-if="isLoading")
+      loading
+  .greenpoint-ave-trains.transit-section(v-else)
+    h1.transit-header Greenpoint Avenue Station
+    .transit-data-row(v-for="departure in departureTimes" :key="departure.time")
       .destination-station
         p.subway-line G
-        h2.station-name {{ translator[departure.destinationStationId] }} 
+        h2.station-name {{ departure.destinationStation }} 
       .arrival-time
         h2.number-min {{ timeDifferenceInMin(departure.time) }}
         p.min min
@@ -12,27 +14,47 @@
 </template>
 
 <script>
+import client from '../../services/httpClient';
+import Loading from '../Loading';
+
 export default {
   name: 'GreenpointAveTrains',
-  props: {
-    headerText: String,
-    timeDifferenceInMin: Function,
-    trainTimes: Array,
-    lastUpdated: String
+  components: {
+    'loading': Loading
   },
   data() {
     return {
-      translator: {
-        '281': 'Court Square',
-        '243': 'Church Ave'
-      }
+      departureTimes: {},
+      isLoading: false,
+      timer: '',
+      lastUpdated: ''
     };
   },
-  computed: {
-    formattedDepartures: function () {
-      return this.trainTimes.map(departureObject => {      
-        return this.timeDifferenceInMin(departureObject.time);
-      })
+  created() {
+    this.getTransitData();
+    // this.timer = setInterval(this.getTransitData, 5000);
+  },
+  beforeDestroy() {
+    this.cancelAutoUpdate();
+  },
+  methods: {
+    async getTransitData() {
+      this.isLoading = true;
+      client.getTransit().then( data => {
+        this.isLoading = false;
+        this.departureTimes = data;
+        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
+      });
+    },
+    timeDifferenceInMin(departure) {
+      const nowTime = new Date(Date.now()).getTime();
+      const departureTime = new Date(departure * 1000).getTime();
+      const difference = ( ( (departureTime - nowTime) / 1000) / 60);
+      const rounded = Math.round(difference);
+      return rounded;
+    },
+    cancelAutoUpdate() {
+      clearInterval(this.timer);
     }
   }
 }
