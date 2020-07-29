@@ -1,6 +1,8 @@
 <template lang="pug">
   .day
     .timestamp {{ formattedTimestamp }}
+    .icon
+      icon-base(:iconName="weatherCode" :iconColor="'white'")
     .temperature
       .real-feel {{ formattedRealFeelHi }} / {{ formattedRealFeelLow }}
       .air-temp {{ formattedAirTempHi }} / {{ formattedAirTempLow }}
@@ -13,6 +15,8 @@
 </template>
 
 <script>
+import IconBase from '../icons/IconBase'
+
 export default {
   name: 'DayWeather',
   props: {
@@ -23,6 +27,9 @@ export default {
     sunrise: String,
     sunset: String,
     weatherCode: String
+  },
+  components: {
+    'icon-base': IconBase
   },
   computed: {
     formattedRealFeelHi: function () {

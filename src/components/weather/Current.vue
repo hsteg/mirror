@@ -5,6 +5,7 @@
       .real-feel {{ formattedRealFeel }}
       .air-temp {{ formattedAirTemp }}
     .other-conditions
+      icon-base(:iconName="currentWeatherData.weather_code.value" :iconColor="'white'")
       p {{ formattedCloudCover }}
       p {{ formattedHumidity }}
       p {{ formattedMoonPhase }}
@@ -21,11 +22,13 @@
 <script>
 import client from '../../services/httpClient';
 import Loading from '../Loading';
+import IconBase from '../icons/IconBase';
 
 export default {
   name: 'CurrentWeather',
   components: {
     'loading': Loading,
+    'icon-base': IconBase,
   },
   data() {
     return {

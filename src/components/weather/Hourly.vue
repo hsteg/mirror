@@ -10,6 +10,7 @@
       :precipitationProbability="hour.precipitation_probability.value"
       :precipitationType="hour.precipitation_type.value"
       :timestamp="hour.observation_time.value"
+      :weatherCode="hour.weather_code.value"
       )
     p.last-updated Last updated: {{ lastUpdated }}
 </template>

@@ -1,6 +1,8 @@
 <template lang="pug">
   .hour
     .timestamp {{ formattedTimestamp }}
+    .icon 
+      icon-base(:iconName="weatherCode" :iconColor="'white'")
     .temperature
       .real-feel {{ formattedRealFeel }}
       .air-temp {{ formattedAirTemp }}
@@ -13,6 +15,8 @@
 </template>
 
 <script>
+import IconBase from '../icons/IconBase'
+
 export default {
   name: 'HourWeather',
   props: {
@@ -20,8 +24,11 @@ export default {
     airTemp: Number,
     precipitationProbability: Number,
     precipitationType: String,
-    timestamp: String
-
+    timestamp: String,
+    weatherCode: String
+  },
+  components: {
+    'icon-base': IconBase
   },
   computed: {
     formattedRealFeel: function () {
