@@ -1,11 +1,13 @@
 <template lang="pug">
   loading(v-if="isLoading")
   .current-weather.weather-section(v-else)
-    .temperature
-      .primary-temp {{ formattedPrimaryTemp }}
-      .secondary-temp {{ formattedSecondaryTemp }}
+    .primary-conditions
+      .icon
+        icon-base(:iconName="currentWeatherData.weather_code.value" :iconColor="'white'" :width="150" :height="150") 
+      .temperature
+        .primary-temp {{ formattedPrimaryTemp }}
+        .secondary-temp {{ formattedSecondaryTemp }}
     .other-conditions
-      icon-base(:iconName="currentWeatherData.weather_code.value" :iconColor="'white'")
       p {{ formattedCloudCover }}
       p {{ formattedHumidity }}
       p {{ formattedMoonPhase }}
@@ -83,10 +85,10 @@ export default {
       return `Precipitation: ${this.currentWeatherData.precipitation.value}` ;
     },
     formattedSunrise: function () {
-      return `Sunrise: ${this.currentWeatherData.sunrise.value}` ;
+      return `Sunrise: ${this.moment(this.currentWeatherData.sunrise.value).format("h:mm a")}` ;
     },
     formattedSunset: function () {
-      return `Sunset: ${this.currentWeatherData.sunset.value}` ;
+      return `Sunset: ${this.moment(this.currentWeatherData.sunset.value).format("h:mm a")}` ;
     }
   },
   methods: {
@@ -109,16 +111,29 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     
-    .temperature {
-      .primary-temp {
-        font-size: 100px;
-        font-weight: bold;
-        text-align: center;
-      }
+    .primary-conditions {
+      display: flex;
+      align-items: center;
 
-      .secondary-temp {
-        font-size: 16px;
-        text-align: center;
+      .temperature {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        .primary-temp {
+          font-size: 100px;
+          position: relative;
+          font-weight: bold;
+          text-align: center;
+        }
+  
+        .secondary-temp {
+          font-size: 16px;
+          text-align: center;
+          position: absolute;
+          top: 105px;
+          right: 0;
+        }
       }
     }
 

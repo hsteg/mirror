@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Weather msg="Welcome to Your Vue.js App"/>
+    <Weather/>
     <Transit/>
+    <!-- add major stock indices -->
   </div>
 </template>
 
@@ -23,11 +24,16 @@ export default {
 
 body {
   background: #2e2e2e;
+  height: calc(100vh - 16px);
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
   color: #e3e3e3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

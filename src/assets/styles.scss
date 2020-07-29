@@ -48,14 +48,24 @@
 
   .weather-section {
     padding: 20px;
+
+    @media (max-width: 767px) {
+      padding-top: 0;
+    }
     
     .weather-header {
       margin-bottom: 20px;
     }  
 
+    .icon {
+      display: flex;
+      justify-content: center;
+    }
+
     .weather-data-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       border-top: 1px solid white;
 
       &:last-of-type {

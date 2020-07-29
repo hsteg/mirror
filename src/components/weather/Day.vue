@@ -8,7 +8,7 @@
       .air-temp(:class="airTempStyle") {{ formattedAirTempHi }} / {{ formattedAirTempLow }}
     .precipitation
       .precipitation-probability {{ formattedPrecipitationProbability }}
-    .sunrise-sunset
+    //- .sunrise-sunset
       .sunrise {{ formattedSunrise }}
       .sunset {{ formattedSunset }}
 
@@ -69,11 +69,19 @@ export default {
 
 <style lang="scss" scoped>
   .day {
+    .timestamp {
+      width: 35px
+    }
+
     .temperature {
       display: flex;
       align-items: center;
+      width: 200px;
+      justify-content: space-around;
 
       @media (max-width: 767px) {
+        width: 110px;
+        
         .hide {
           display: none;
         }
@@ -81,6 +89,7 @@ export default {
         .show {
           font-size: 26px;
           font-weight: 600;
+          width: 110px;
         }
       }
       
@@ -88,6 +97,11 @@ export default {
         font-size: 26px;  
         font-weight: 600;
       }
+    }
+
+    .precipitation {
+      width: 41px;
+      text-align: right;
     }
 
     .sunrise-sunset {
