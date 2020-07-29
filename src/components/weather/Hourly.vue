@@ -11,6 +11,7 @@
       :precipitationType="hour.precipitation_type.value"
       :timestamp="hour.observation_time.value"
       :weatherCode="hour.weather_code.value"
+      :displayRealFeel="displayRealFeel"
       )
     p.last-updated Last updated: {{ lastUpdated }}
 </template>
@@ -25,6 +26,9 @@ export default {
   components: {
     'loading': Loading,
     'hour': Hour
+  },
+  props: {
+    displayRealFeel: Boolean
   },
   data() { 
     return {

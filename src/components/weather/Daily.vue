@@ -12,6 +12,7 @@ loading(v-if="isLoading")
     :sunset="day.sunset.value"
     :airTemp="day.temp"
     :weatherCode="day.weather_code.value"
+    :displayRealFeel="displayRealFeel"
   )
   p.last-updated Last updated: {{ lastUpdated }}
   
@@ -27,6 +28,9 @@ export default {
   components: {
     'loading': Loading,
     'day': Day
+  },
+  props: {
+    displayRealFeel: Boolean
   },
   data() {
     return {

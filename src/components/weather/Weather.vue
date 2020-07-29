@@ -1,9 +1,10 @@
 <template lang="pug">
   #weather
+    .temp-selector(@click="toggleTempDisplay") {{ formattedTempDisplay }} temp shown, click to toggle
     .weather-main
-      current-weather
-      hourly-weather
-      daily-weather
+      current-weather(:displayRealFeel="displayRealFeel")
+      hourly-weather(:displayRealFeel="displayRealFeel")
+      daily-weather(:displayRealFeel="displayRealFeel")
 </template>
 
 <script>
@@ -25,22 +26,40 @@ export default {
   },
   data() {
     return {
-      weather: {},
+      displayRealFeel: true
     };
   },
-  computed: {},
-  methods: {}
+  computed: {
+    formattedTempDisplay: function () {
+      return this.displayRealFeel ? 'RealFeel' : 'Air'
+    }
+  },
+  methods: {
+    toggleTempDisplay() {
+      this.displayRealFeel = !this.displayRealFeel;
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
   #weather {
     width: 100%;
+    border-radius: 15px;
+    border: solid 1px #e3e3e3;
+
+    .temp-selector {
+      @media (min-width: 768px) {
+        display: none;
+      }
+
+      text-decoration: underline;
+      text-align: center;
+      padding: 20px 20px 0 20px;
+    }
 
     .weather-main {
       width: 100%;
-      border-radius: 15px;
-      border: solid 1px #e3e3e3;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
 

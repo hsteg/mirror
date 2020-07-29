@@ -2,8 +2,8 @@
   loading(v-if="isLoading")
   .current-weather.weather-section(v-else)
     .temperature
-      .real-feel {{ formattedRealFeel }}
-      .air-temp {{ formattedAirTemp }}
+      .primary-temp {{ formattedPrimaryTemp }}
+      .secondary-temp {{ formattedSecondaryTemp }}
     .other-conditions
       icon-base(:iconName="currentWeatherData.weather_code.value" :iconColor="'white'")
       p {{ formattedCloudCover }}
@@ -30,6 +30,9 @@ export default {
     'loading': Loading,
     'icon-base': IconBase,
   },
+  props: {
+    displayRealFeel: Boolean
+  },
   data() {
     return {
       currentWeatherData: {},
@@ -45,7 +48,13 @@ export default {
       return `${Math.round(this.currentWeatherData.feels_like.value)}°`;
     },
     formattedAirTemp: function () {
-      return `Air Temp: ${Math.round(this.currentWeatherData.temp.value)}°`;
+      return `${Math.round(this.currentWeatherData.temp.value)}°`;
+    },
+    formattedPrimaryTemp: function () {
+      return this.displayRealFeel ? this.formattedRealFeel : this.formattedAirTemp;
+    },
+    formattedSecondaryTemp: function () {
+      return this.displayRealFeel ? `Air temp: ${this.formattedAirTemp}` : `RealFeel: ${this.formattedRealFeel}`;
     },
     // iconSrc: function () {
     //   return `http://openweathermap.org/img/wn/${this.currentConditions.icon}@4x.png`
@@ -78,10 +87,7 @@ export default {
     },
     formattedSunset: function () {
       return `Sunset: ${this.currentWeatherData.sunset.value}` ;
-    },
-
-
-
+    }
   },
   methods: {
     async getWeatherData() {
@@ -104,13 +110,13 @@ export default {
     justify-content: space-evenly;
     
     .temperature {
-      .real-feel {
+      .primary-temp {
         font-size: 100px;
         font-weight: bold;
         text-align: center;
       }
 
-      .air-temp {
+      .secondary-temp {
         font-size: 16px;
         text-align: center;
       }
