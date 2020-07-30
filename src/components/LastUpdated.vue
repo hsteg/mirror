@@ -1,5 +1,5 @@
 <template lang="pug">
-  .last-updated
+  .last-updated(@click="$emit('fetchData')")
     p.updated-at Last updated: {{ lastUpdatedTime }}
     icon-base.refresh-icon(
       :iconName="'refresh'"

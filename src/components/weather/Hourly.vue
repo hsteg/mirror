@@ -15,7 +15,7 @@
       :weatherCode="hour.weather_code.value"
       :displayRealFeel="displayRealFeel"
       )
-    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated")
+    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getHourlyWeatherData")
 </template>
 
 <script>

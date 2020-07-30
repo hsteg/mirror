@@ -10,7 +10,7 @@
           :style="{ backgroundColor: status.color }"
         ) {{ line }}
       p.status {{ status.status }}
-    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated")
+    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getSubwayStatusData")
 </template>
 
 <script>

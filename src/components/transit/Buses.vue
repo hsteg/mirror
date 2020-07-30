@@ -5,6 +5,8 @@
       v-for="busStop in busData"
       :key="busStop.name"
       :busStop="busStop"
+      @fetchB62SData="getB62southData"
+      @fetchB62NData="getB62northData"
     )
 </template>
 

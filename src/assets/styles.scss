@@ -82,14 +82,16 @@
 
 .last-updated {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   cursor: pointer;
+  
 
   .updated-at {
     text-align: center;
     font-size: 14px;
     display: inline;
+    margin-bottom: 0;
   }
 
   .refresh-icon {

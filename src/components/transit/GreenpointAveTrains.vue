@@ -2,14 +2,14 @@
   .greenpoint-ave-trains.transit-section
     h1.transit-header Greenpoint Avenue Station
     loading(v-if="isLoading")
-    .transit-data-row(v-else v-for="departure in departureTimes" :key="departure.time")
+    .transit-data-row(v-else v-for="departure in departureTimes" :key="departure.time + departure.destinationStationId")
       .destination-station
         p.subway-line G
         h2.station-name {{ departure.destinationStation }} 
       .arrival-time
         h2.number-min {{ timeDifferenceInMin(departure.time) }}
         p.min min
-    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated")
+    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getTransitData")
 </template>
 
 <script>

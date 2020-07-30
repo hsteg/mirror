@@ -10,7 +10,7 @@
       .arrival-time 
         h2.number-min {{ -1 * (moment().diff(arrival.expectedArrivalTime, 'minutes')) }} 
         p.min min
-    last-updated(v-if="!busStop.isLoading" :lastUpdatedTime="busStop.lastUpdated")
+    last-updated(v-if="!busStop.isLoading" :lastUpdatedTime="busStop.lastUpdated" @fetchData="fetchBusData")
 </template>
 
 <script>
@@ -29,6 +29,15 @@ export default {
   computed: {
     noStopData() {
       return this.busStop.data.length === 0;
+    }
+  },
+  methods: {
+    fetchBusData() {
+      if (this.busStop.name === 'B62 towards Williamsburg') {
+        this.$emit('fetchB62SData');
+      } else {
+        this.$emit('fetchB62NData');
+      }
     }
   }
 }

@@ -24,7 +24,7 @@
       p {{ formattedSunset }}
       p {{ formattedWindGust }}
       p {{ formattedWindSpeed }}
-    last-updated(:lastUpdatedTime="lastUpdated")
+    last-updated(:lastUpdatedTime="lastUpdated" @fetchData="getWeatherData")
 
 </template>
 
