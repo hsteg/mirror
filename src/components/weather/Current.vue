@@ -24,7 +24,7 @@
       p {{ formattedSunset }}
       p {{ formattedWindGust }}
       p {{ formattedWindSpeed }}
-    p.last-updated Last updated: {{ lastUpdated }}
+    last-updated(:lastUpdatedTime="lastUpdated")
 
 </template>
 
@@ -32,12 +32,14 @@
 import client from '../../services/httpClient';
 import Loading from '../Loading';
 import IconBase from '../icons/IconBase';
+import LastUpdated from '../LastUpdated';
 
 export default {
   name: 'CurrentWeather',
   components: {
     'loading': Loading,
     'icon-base': IconBase,
+    'last-updated': LastUpdated
   },
   props: {
     displayRealFeel: Boolean

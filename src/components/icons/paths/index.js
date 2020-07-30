@@ -25,6 +25,8 @@ import SnowLight from './weather_codes/SnowLight.vue'
 import SnowHeavy from './weather_codes/SnowHeavy.vue'
 import TStorm from './weather_codes/TStorm.vue'
 
+import Refresh from './Refresh.vue'
+
 export default {
   ClearDay,
   ClearNight,
@@ -51,5 +53,6 @@ export default {
   Snow,
   SnowLight,
   SnowHeavy,
-  TStorm
+  TStorm,
+  Refresh
 }

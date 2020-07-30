@@ -46,6 +46,7 @@ export default {
         "snow_light": "SnowLight",
         "snow_heavy": "SnowHeavy",
         "tstorm": "TStorm",
+        "refresh": "Refresh"
       }
     };
   },

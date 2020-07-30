@@ -15,19 +15,21 @@
       :weatherCode="hour.weather_code.value"
       :displayRealFeel="displayRealFeel"
       )
-    p.last-updated(v-if="!isLoading") Last updated: {{ lastUpdated }}
+    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated")
 </template>
 
 <script>
 import client from '../../services/httpClient';
 import Loading from '../Loading';
 import Hour from './Hour';
+import LastUpdated from '../LastUpdated';
 
 export default {
   name: 'HourlyWeather',
   components: {
     'loading': Loading,
-    'hour': Hour
+    'hour': Hour,
+    'last-updated': LastUpdated
   },
   props: {
     displayRealFeel: Boolean

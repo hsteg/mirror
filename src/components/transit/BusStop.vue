@@ -10,16 +10,18 @@
       .arrival-time 
         h2.number-min {{ -1 * (moment().diff(arrival.expectedArrivalTime, 'minutes')) }} 
         p.min min
-    p.last-updated(v-if="!busStop.isLoading") Last updated: {{ busStop.lastUpdated }}
+    last-updated(v-if="!busStop.isLoading" :lastUpdatedTime="busStop.lastUpdated")
 </template>
 
 <script>
 import Loading from '../Loading'
+import LastUpdated from '../LastUpdated';
 
 export default {
   name: 'BusStop',
   components: {
-    'loading': Loading
+    'loading': Loading,
+    'last-updated': LastUpdated
   },
   props: {
     busStop: Object

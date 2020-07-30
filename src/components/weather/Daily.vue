@@ -15,7 +15,7 @@
     :weatherCode="day.weather_code.value"
     :displayRealFeel="displayRealFeel"
   )
-  p.last-updated(v-if="!isLoading") Last updated: {{ lastUpdated }}
+  last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated")
   
 </template>
 
@@ -23,12 +23,14 @@
 import client from '../../services/httpClient';
 import Loading from '../Loading';
 import Day from './Day';
+import LastUpdated from '../LastUpdated';
 
 export default {
   name: "DailyWeather",
   components: {
     'loading': Loading,
-    'day': Day
+    'day': Day,
+    'last-updated': LastUpdated
   },
   props: {
     displayRealFeel: Boolean

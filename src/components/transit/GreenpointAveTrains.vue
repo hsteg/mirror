@@ -9,17 +9,19 @@
       .arrival-time
         h2.number-min {{ timeDifferenceInMin(departure.time) }}
         p.min min
-    p.last-updated(v-if="!isLoading") Last updated: {{ lastUpdated }}
+    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated")
 </template>
 
 <script>
 import client from '../../services/httpClient';
 import Loading from '../Loading';
+import LastUpdated from '../LastUpdated';
 
 export default {
   name: 'GreenpointAveTrains',
   components: {
-    'loading': Loading
+    'loading': Loading,
+    'last-updated': LastUpdated
   },
   data() {
     return {
