@@ -1,8 +1,9 @@
 <template lang="pug">
-loading(v-if="isLoading")
-.daily-weather.weather-section(v-else)
+.daily-weather.weather-section
   h1.weather-header Daily
+  loading(v-if="isLoading")
   day.weather-data-row(
+    v-else
     v-for="day in dailyWeatherData"
     :key="day.observation_time.value"
     :realFeel="day.feels_like"
@@ -14,7 +15,7 @@ loading(v-if="isLoading")
     :weatherCode="day.weather_code.value"
     :displayRealFeel="displayRealFeel"
   )
-  p.last-updated Last updated: {{ lastUpdated }}
+  p.last-updated(v-if="!isLoading") Last updated: {{ lastUpdated }}
   
 </template>
 

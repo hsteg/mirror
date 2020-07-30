@@ -43,9 +43,13 @@
 }
 
 #weather {
-  h1, h2 {
+  h2 {
     display: inline-block;
     margin: 0;
+  }
+
+  h1 {
+    margin: 0
   }
 
   .weather-section {
