@@ -3,7 +3,14 @@
   .current-weather.weather-section(v-else)
     .primary-conditions
       .icon
-        icon-base(:iconName="currentWeatherData.weather_code.value" :iconColor="'white'" :width="150" :height="150") 
+        icon-base(
+          :iconName="currentWeatherData.weather_code.value"
+          :observationTime="currentWeatherData.observation_time.value"
+          :sunriseTime="currentWeatherData.sunrise.value"
+          :iconColor="'white'"
+          :width="150"
+          :height="150"
+        ) 
       .temperature
         .primary-temp {{ formattedPrimaryTemp }}
         .secondary-temp {{ formattedSecondaryTemp }}

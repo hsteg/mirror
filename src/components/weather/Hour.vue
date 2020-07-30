@@ -2,7 +2,12 @@
   .hour
     .timestamp {{ formattedTimestamp }}
     .icon 
-      icon-base(:iconName="weatherCode" :iconColor="'white'")
+      icon-base(
+        :iconName="weatherCode"
+        :iconColor="'white'"
+        :sunriseTime="sunriseTime"
+        :observationTime="timestamp"
+      )
     .temperature
       .real-feel(:class="realFeelStyle") {{ formattedRealFeel }}
       .air-temp(:class="airTempStyle") {{ formattedAirTemp }}
@@ -26,7 +31,8 @@ export default {
     precipitationType: String,
     timestamp: String,
     weatherCode: String,
-    displayRealFeel: Boolean
+    displayRealFeel: Boolean,
+    sunriseTime: String
   },
   components: {
     'icon-base': IconBase

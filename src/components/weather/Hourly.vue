@@ -10,6 +10,7 @@
       :airTemp="hour.temp.value"
       :precipitationProbability="hour.precipitation_probability.value"
       :precipitationType="hour.precipitation_type.value"
+      :sunriseTime="hour.sunrise.value"
       :timestamp="hour.observation_time.value"
       :weatherCode="hour.weather_code.value"
       :displayRealFeel="displayRealFeel"

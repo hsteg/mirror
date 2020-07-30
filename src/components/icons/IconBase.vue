@@ -55,11 +55,22 @@ export default {
   computed: {
     formattedIconName: function () {
       if (this.iconName === 'clear' || this.iconName === 'mostly_clear' || this.iconName === 'partly_cloudy') {
-        const withTime = `${this.iconName}_day`
-        return `${this.translator[withTime]}`;
+        if (this.isBeforeSunrise) {
+          const withTime = `${this.iconName}_night`
+          return `${this.translator[withTime]}`;
+        } else {
+          const withTime = `${this.iconName}_day`
+          return `${this.translator[withTime]}`;
+        }
       } else {
         return `${this.translator[this.iconName]}`;
       }
+    },
+    timeNow: function () {
+      return this.moment().toISOString();
+    },
+    isBeforeSunrise: function () {
+      return !!this.sunriseTime && (this.observationTime < this.sunriseTime);
     }
   },
   props: {
@@ -78,6 +89,14 @@ export default {
     iconColor: {
       type: String,
       default: 'currentColor'
+    },
+    sunriseTime: {
+      type: String,
+      default: null
+    },
+    observationTime: {
+      type: String,
+      default: null
     }
   }
 }
