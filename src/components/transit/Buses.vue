@@ -15,7 +15,7 @@ import BusStop from './BusStop';
 export default {
   name: 'Buses',
   components: {
-    'bus-stop': BusStop
+    'bus-stop': BusStop,
   },
   data() {
     return {
@@ -24,13 +24,15 @@ export default {
           name: 'B62 towards Williamsburg',
           data: [],
           lastUpdated: '',
-          timer: ''
+          timer: '',
+          isLoading: false
         },
         b62north: {
           name: 'B62 towards LIC',
           data: [],
           lastUpdated: '',
-          timer: ''
+          timer: '',
+          isLoading: false
         }
       }
     }
@@ -54,14 +56,18 @@ export default {
   },
   methods: {
     getB62southData() {
+      this.busData.b62south.isLoading = true;
       client.getB62south().then( data => {
         this.busData.b62south.data = data;
+        this.busData.b62south.isLoading = false;
         this.busData.b62south.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
     },
     getB62northData() {
+      this.busData.b62north.isLoading = true;
       client.getB62north().then( data => {
         this.busData.b62north.data = data;
+        this.busData.b62north.isLoading = false;
         this.busData.b62north.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
     },

@@ -1,16 +1,15 @@
 <template lang="pug">
-  .loading(v-if="isLoading")
-      loading
-  .greenpoint-ave-trains.transit-section(v-else)
+  .greenpoint-ave-trains.transit-section
     h1.transit-header Greenpoint Avenue Station
-    .transit-data-row(v-for="departure in departureTimes" :key="departure.time")
+    loading(v-if="isLoading")
+    .transit-data-row(v-else v-for="departure in departureTimes" :key="departure.time")
       .destination-station
         p.subway-line G
         h2.station-name {{ departure.destinationStation }} 
       .arrival-time
         h2.number-min {{ timeDifferenceInMin(departure.time) }}
         p.min min
-    p.last-updated Last updated: {{ lastUpdated }}
+    p.last-updated(v-if="!isLoading") Last updated: {{ lastUpdated }}
 </template>
 
 <script>

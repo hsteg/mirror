@@ -1,7 +1,8 @@
 <template lang="pug">
   .subway-status.transit-section
     h1.transit-header Subway Status
-    .transit-data-row(v-for="status in subwayStatuses" :key="status.color")
+    loading(v-if="isLoading")
+    .transit-data-row(v-else v-for="status in subwayStatuses" :key="status.color")
       .lines
         p.subway-line(
           v-for="line in status.lines"
@@ -9,19 +10,24 @@
           :style="{ backgroundColor: status.color }"
         ) {{ line }}
       p.status {{ status.status }}
-    p.last-updated Last updated: {{ lastUpdated }}
+    p.last-updated(v-if="!isLoading") Last updated: {{ lastUpdated }}
 </template>
 
 <script>
 import client from '../../services/httpClient';
+import Loading from '../Loading'
 
 export default {
   name: 'SubwayStatus',
+  components: {
+    'loading': Loading
+  },
   data() {
     return {
       subwayStatuses: [],
       timer: '',
-      lastUpdated: ''
+      lastUpdated: '',
+      isLoading: false
     };
   },
   created() {
@@ -33,8 +39,10 @@ export default {
   },
   methods: {
     getSubwayStatusData() {
+      this.isLoading = true;
       client.getSubwayStatus().then( data => {
         this.subwayStatuses = data;
+        this.isLoading = false;
         this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
     },

@@ -1,7 +1,8 @@
 <template lang="pug">
   .bus-stop
     h2.stop-name {{ busStop.name }}
-    p.no-buses(v-if="noStopData") No buses en-route
+    p.no-buses(v-if="noStopData && !busStop.isLoading") No buses en-route
+    loading(v-if="busStop.isLoading")
     .transit-data-row(v-else v-for="arrival in busStop.data" :key="arrival.expectedArrivalTime")
       .distance 
         h2.number {{ arrival.readableDistanceNumber }} 
@@ -9,12 +10,17 @@
       .arrival-time 
         h2.number-min {{ -1 * (moment().diff(arrival.expectedArrivalTime, 'minutes')) }} 
         p.min min
-    p.last-updated Last updated: {{ busStop.lastUpdated }}
+    p.last-updated(v-if="!busStop.isLoading") Last updated: {{ busStop.lastUpdated }}
 </template>
 
 <script>
+import Loading from '../Loading'
+
 export default {
   name: 'BusStop',
+  components: {
+    'loading': Loading
+  },
   props: {
     busStop: Object
   },
@@ -32,6 +38,8 @@ export default {
 
     .stop-name {
       margin-bottom: 5px;
+      margin-top: 0;
+      display: block;
     }
 
     .transit-data-row {

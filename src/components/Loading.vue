@@ -80,6 +80,7 @@ export default {
     display: inline-block;
     overflow: hidden;
     background: none;
+    margin: 0 auto;
   }
   .ldio-xy3tpc9pusq {
     width: 100%;
