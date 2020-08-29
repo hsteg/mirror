@@ -28,8 +28,6 @@ export default {
 
     .transit-main {
       width: 100%;
-      border-radius: 15px;
-      border: solid 1px #e3e3e3;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
     

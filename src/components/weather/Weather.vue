@@ -45,8 +45,6 @@ export default {
 <style lang="scss" scoped>
   #weather {
     width: 100%;
-    border-radius: 15px;
-    border: solid 1px #e3e3e3;
 
     .temp-selector {
       @media (min-width: 768px) {
