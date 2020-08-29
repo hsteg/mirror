@@ -30,6 +30,7 @@
 
 <script>
 import client from '../../services/httpClient';
+import { autoUpdate } from '../../mixins/autoUpdate';
 import Loading from '../Loading';
 import IconBase from '../icons/IconBase';
 import LastUpdated from '../LastUpdated';
@@ -41,6 +42,7 @@ export default {
     'icon-base': IconBase,
     'last-updated': LastUpdated
   },
+  mixins: [ autoUpdate ],
   props: {
     displayRealFeel: Boolean
   },
@@ -53,6 +55,8 @@ export default {
   },
   created() {
     this.getWeatherData();
+    // every 2 min
+    this.setAutoUpdate(this.getWeatherData, 120);
   }, 
   computed: {
     formattedRealFeel: function () {

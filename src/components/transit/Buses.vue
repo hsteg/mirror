@@ -12,6 +12,7 @@
 
 <script>
 import client from '../../services/httpClient';
+import { autoUpdate } from '../../mixins/autoUpdate';
 import BusStop from './BusStop';
 
 export default {
@@ -19,6 +20,7 @@ export default {
   components: {
     'bus-stop': BusStop,
   },
+  mixins: [ autoUpdate ],
   data() {
     return {
       busData: {
@@ -26,14 +28,12 @@ export default {
           name: 'B62 towards Williamsburg',
           data: [],
           lastUpdated: '',
-          timer: '',
           isLoading: false
         },
         b62north: {
           name: 'B62 towards LIC',
           data: [],
           lastUpdated: '',
-          timer: '',
           isLoading: false
         }
       }
@@ -42,19 +42,8 @@ export default {
   created() {
     this.getB62southData();
     this.getB62northData();
-    // this.busData.b62south.timer = setInterval(this.getB62southData, 5000);
-    // this.busData.b62north.timer = setInterval(this.getB62northData, 5000);
-  },
-  beforeDestroy() {
-    this.cancelAutoUpdate();
-  },
-  computed: {
-    noB62northBusData() {
-      return this.busData.b62north.data.length === 0;
-    },
-    noB62southBusData() {
-      return this.busData.b62south.data.length === 0;
-    }
+    this.setAutoUpdate(this.getB62southData, 30);
+    this.setAutoUpdate(this.getB62northData, 30);
   },
   methods: {
     getB62southData() {
@@ -72,9 +61,6 @@ export default {
         this.busData.b62north.isLoading = false;
         this.busData.b62north.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
-    },
-    cancelAutoUpdate() {
-      clearInterval(this.timer);
     }
   },
 

@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    autoUpdate: false
   },
   mutations: {
+    enableAutoUpdate(state) {
+      state.autoUpdate = true;
+    }
   },
   actions: {
   },

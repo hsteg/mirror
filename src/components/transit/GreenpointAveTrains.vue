@@ -14,6 +14,7 @@
 
 <script>
 import client from '../../services/httpClient';
+import { autoUpdate } from '../../mixins/autoUpdate';
 import Loading from '../Loading';
 import LastUpdated from '../LastUpdated';
 
@@ -23,20 +24,17 @@ export default {
     'loading': Loading,
     'last-updated': LastUpdated
   },
+  mixins: [ autoUpdate ],
   data() {
     return {
       departureTimes: {},
       isLoading: false,
-      timer: '',
       lastUpdated: ''
     };
   },
   created() {
     this.getTransitData();
-    // this.timer = setInterval(this.getTransitData, 5000);
-  },
-  beforeDestroy() {
-    this.cancelAutoUpdate();
+    this.setAutoUpdate(this.getTransitData, 30);
   },
   methods: {
     async getTransitData() {
@@ -53,9 +51,6 @@ export default {
       const difference = ( ( (departureTime - nowTime) / 1000) / 60);
       const rounded = Math.round(difference);
       return rounded;
-    },
-    cancelAutoUpdate() {
-      clearInterval(this.timer);
     }
   }
 }

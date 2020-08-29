@@ -20,6 +20,7 @@
 
 <script>
 import client from '../../services/httpClient';
+import { autoUpdate } from '../../mixins/autoUpdate';
 import Loading from '../Loading';
 import Hour from './Hour';
 import LastUpdated from '../LastUpdated';
@@ -31,6 +32,7 @@ export default {
     'hour': Hour,
     'last-updated': LastUpdated
   },
+  mixins: [ autoUpdate ],
   props: {
     displayRealFeel: Boolean
   },
@@ -43,6 +45,8 @@ export default {
   },
   created() {
     this.getHourlyWeatherData();
+    // every 15 min
+    this.setAutoUpdate(this.getHourlyWeatherData, 900);
   },
   computed: {},
   methods: {

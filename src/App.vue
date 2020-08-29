@@ -15,6 +15,10 @@ export default {
   components: {
     Weather,
     Transit
+  },
+  created() {
+    let isMirrorMode = new URLSearchParams(window.location.search).get('mirror')
+    if (isMirrorMode) this.$store.commit('enableAutoUpdate');
   }
 }
 </script>

@@ -15,6 +15,7 @@
 
 <script>
 import client from '../../services/httpClient';
+import { autoUpdate } from '../../mixins/autoUpdate'
 import Loading from '../Loading';
 import LastUpdated from '../LastUpdated';
 
@@ -24,20 +25,17 @@ export default {
     'loading': Loading,
     'last-updated': LastUpdated
   },
+  mixins: [ autoUpdate ],
   data() {
     return {
       subwayStatuses: [],
-      timer: '',
       lastUpdated: '',
       isLoading: false
     };
   },
   created() {
     this.getSubwayStatusData()
-    // this.timer = setInterval(this.getSubwayStatusData, 60000);
-  },
-  beforeDestroy() {
-    this.cancelAutoUpdate();
+    this.setAutoUpdate(this.getSubwayStatusData, 300);
   },
   methods: {
     getSubwayStatusData() {
@@ -47,9 +45,6 @@ export default {
         this.isLoading = false;
         this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
       })
-    },
-    cancelAutoUpdate() {
-      clearInterval(this.timer);
     }
   }
 }
