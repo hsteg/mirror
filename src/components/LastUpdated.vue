@@ -1,6 +1,6 @@
 <template lang="pug">
   .last-updated(@click="$emit('fetchData')")
-    p.updated-at Last updated: {{ lastUpdatedTime }}
+    p.updated-at Last updated: {{ formattedLastUpdatedTime }}
     icon-base.refresh-icon(
       :iconName="'refresh'"
       :width="15"
@@ -17,7 +17,12 @@ export default {
     'icon-base': IconBase
   },
   props: {
-    lastUpdatedTime: String
+    lastUpdatedTime: Object
+  },
+  computed: {
+    formattedLastUpdatedTime() {
+      return this.lastUpdatedTime.format("MMM D YYYY, HH:mm:ss");
+    }
   }
 }
 </script>

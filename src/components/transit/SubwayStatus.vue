@@ -43,7 +43,7 @@ export default {
       client.getSubwayStatus().then( data => {
         this.subwayStatuses = data;
         this.isLoading = false;
-        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
+        this.lastUpdated = this.moment();
       })
     }
   }

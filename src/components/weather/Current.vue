@@ -110,7 +110,7 @@ export default {
       client.getWeather().then( data => {
         this.isLoading = false;
         this.currentWeatherData = data;
-        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
+        this.lastUpdated = this.moment();
       })
     }
   }

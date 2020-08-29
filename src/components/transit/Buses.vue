@@ -51,7 +51,7 @@ export default {
       client.getB62south().then( data => {
         this.busData.b62south.data = data;
         this.busData.b62south.isLoading = false;
-        this.busData.b62south.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
+        this.busData.b62south.lastUpdated = this.moment();
       })
     },
     getB62northData() {
@@ -59,7 +59,7 @@ export default {
       client.getB62north().then( data => {
         this.busData.b62north.data = data;
         this.busData.b62north.isLoading = false;
-        this.busData.b62north.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
+        this.busData.b62north.lastUpdated = this.moment();
       })
     }
   },

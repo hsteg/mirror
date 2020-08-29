@@ -42,7 +42,7 @@ export default {
       client.getTransit().then( data => {
         this.isLoading = false;
         this.departureTimes = data;
-        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
+        this.lastUpdated = this.moment();
       });
     },
     timeDifferenceInMin(departure) {

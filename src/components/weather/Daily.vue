@@ -55,7 +55,7 @@ export default {
       client.getWeatherDaily().then( data => {
         this.isLoading = false;
         this.dailyWeatherData = data;
-        this.lastUpdated = this.moment().format("MMM D YYYY, HH:mm:ss");
+        this.lastUpdated = this.moment();
       })
     }
   }
