@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { autoUpdate } from '../../mixins/autoUpdate';
 import Loading from '../Loading'
 import LastUpdated from '../LastUpdated';
 
@@ -23,8 +24,12 @@ export default {
     'loading': Loading,
     'last-updated': LastUpdated
   },
+  mixins: [ autoUpdate ],
   props: {
     busStop: Object
+  },
+  created() {
+    this.setAutoUpdate(this.fetchBusData, 30);
   },
   computed: {
     noStopData() {

@@ -12,7 +12,6 @@
 
 <script>
 import client from '../../services/httpClient';
-import { autoUpdate } from '../../mixins/autoUpdate';
 import BusStop from './BusStop';
 
 export default {
@@ -20,7 +19,6 @@ export default {
   components: {
     'bus-stop': BusStop,
   },
-  mixins: [ autoUpdate ],
   data() {
     return {
       busData: {
@@ -42,8 +40,6 @@ export default {
   created() {
     this.getB62southData();
     this.getB62northData();
-    this.setAutoUpdate(this.getB62southData, 30);
-    this.setAutoUpdate(this.getB62northData, 30);
   },
   methods: {
     getB62southData() {
