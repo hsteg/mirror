@@ -36,7 +36,7 @@ export default {
 body {
   background: #2e2e2e;
   margin: 0;
-  height: calc(100vh - 16px);
+  height: 100vh;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
