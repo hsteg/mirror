@@ -19,8 +19,8 @@ export default {
   .ldio-1wllw7yzbe9 div {
     position: absolute;
     animation: ldio-1wllw7yzbe9 1.02s linear infinite;
-    width: 163.2px;
-    height: 163.2px;
+    width: 100px;
+    height: 100px;
     top: 20.4px;
     left: 20.4px;
     border-radius: 50%;
@@ -28,8 +28,8 @@ export default {
     transform-origin: 81.6px 83.64px;
   }
   .loadingio-spinner-eclipse-apxv8otbi6d {
-    width: 204px;
-    height: 204px;
+    width: 150px;
+    height: 150px;
     display: inline-block;
     overflow: hidden;
     background: none;
