@@ -30,6 +30,7 @@ export default {
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
+      min-height: 572px;
     
       @media (max-width: 767px) {
         display: flex;    

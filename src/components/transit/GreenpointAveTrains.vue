@@ -1,6 +1,6 @@
 <template lang="pug">
   .greenpoint-ave-trains.transit-section
-    h1.transit-header Greenpoint Avenue Station
+    h1.transit-header Greenpoint Avenue
     loading(v-if="isLoading")
     .transit-data-row(v-else v-for="departure in departureTimes" :key="departure.time + departure.destinationStationId")
       .destination-station
