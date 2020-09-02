@@ -31,9 +31,11 @@ export default {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       min-height: 572px;
+      align-items: end;
     
       @media (max-width: 767px) {
         display: flex;    
+        align-items: normal;
         flex-direction: column;
       }
     }

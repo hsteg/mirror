@@ -50,7 +50,9 @@ export default {
 
 <style lang="scss" scoped>
   .bus-stop {
-    margin-bottom: 20px;
+    &:first-of-type {
+      margin-bottom: 20px;
+    }
 
     .stop-name {
       margin-bottom: 5px;
