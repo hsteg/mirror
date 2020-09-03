@@ -24,6 +24,8 @@
       p {{ formattedSunset }}
       p {{ formattedWindGust }}
       p {{ formattedWindSpeed }}
+      p {{ formattedWindDirection }}
+      p {{ formattedAirQuality }}
     last-updated(:lastUpdatedTime="lastUpdated" @fetchData="getWeatherData")
 
 </template>
@@ -71,15 +73,10 @@ export default {
     formattedSecondaryTemp: function () {
       return this.displayRealFeel ? `Air temp: ${this.formattedAirTemp}` : `RealFeel: ${this.formattedRealFeel}`;
     },
-    // iconSrc: function () {
-    //   return `http://openweathermap.org/img/wn/${this.currentConditions.icon}@4x.png`
-    // },
     formattedHumidity: function () {
       return `Humidity: ${this.currentWeatherData.humidity.value}%`
     },
     formattedWindSpeed: function () {
-      // i have the wind direction too now
-      // also visibility, weather_code: mostly_cloudy, 
       return `Wind Speed: ${Math.round(this.currentWeatherData.wind_speed.value)}`
     },
     formattedWindGust: function () {
@@ -102,6 +99,14 @@ export default {
     },
     formattedSunset: function () {
       return `Sunset: ${this.moment(this.currentWeatherData.sunset.value).format("h:mm a")}` ;
+    },
+    formattedAirQuality: function () {
+      return `Air Quality: ${this.currentWeatherData.epa_health_concern.value}`;
+    },
+    formattedWindDirection: function () {
+      const directionInDegrees = this.currentWeatherData.wind_direction.value;
+      const cardinalDirection = this.cardinalWindDirection(directionInDegrees);
+      return `Wind Direction: ${cardinalDirection}`;
     }
   },
   methods: {
@@ -112,6 +117,31 @@ export default {
         this.currentWeatherData = data;
         this.lastUpdated = this.moment();
       })
+    },
+    cardinalWindDirection(directionInDegrees) {
+      let cardinalDirection;
+
+      if (directionInDegrees > 0 && directionInDegrees <= 22.5) {
+        cardinalDirection = "N";
+      } else if (directionInDegrees > 22.5 && directionInDegrees <= 67.5) {
+        cardinalDirection = "NE"
+      } else if (directionInDegrees > 67.5  && directionInDegrees <= 112.5) {
+        cardinalDirection = "E"
+      } else if (directionInDegrees > 112.5 && directionInDegrees <= 157.5) {
+        cardinalDirection = "SE"
+      } else if (directionInDegrees > 157.5  && directionInDegrees <= 202.5) {
+        cardinalDirection = "S"
+      } else if (directionInDegrees > 202.5 && directionInDegrees <= 247.5) {
+        cardinalDirection = "SW"
+      } else if (directionInDegrees > 247.5 && directionInDegrees <= 292.5) {
+        cardinalDirection = "W"
+      } else if (directionInDegrees > 292.5 && directionInDegrees <= 337.5) {
+        cardinalDirection = "NW"
+      } else if (directionInDegrees > 337.5 && directionInDegrees <= 360) {
+        cardinalDirection = "N"
+      }
+
+      return cardinalDirection;
     }
   }
 }
