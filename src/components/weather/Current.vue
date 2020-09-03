@@ -123,6 +123,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    margin-top: -15px;
     
     .primary-conditions {
       display: flex;

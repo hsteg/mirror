@@ -54,7 +54,7 @@ export default {
       text-decoration: underline;
       text-align: center;
       font-size: 14px;
-      padding: 10px 20px 0 20px;
+      margin: 10px 0 20px 0;
     }
 
     .weather-main {
