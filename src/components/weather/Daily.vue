@@ -5,14 +5,12 @@
   day.weather-data-row(
     v-else
     v-for="day in dailyWeatherData"
-    :key="day.observation_time.value"
-    :realFeel="day.feels_like"
-    :timestamp="day.observation_time.value"
-    :precipitationProbability="day.precipitation_probability.value"
-    :sunrise="day.sunrise.value"
-    :sunset="day.sunset.value"
-    :airTemp="day.temp"
-    :weatherCode="day.weather_code.value"
+    :key="day.observationTime"
+    :realFeel="day.realFeel"
+    :timestamp="day.observationTime"
+    :precipitationProbability="day.precipitationProbability"
+    :airTemp="day.airTemp"
+    :weatherCode="day.weatherCode"
     :displayRealFeel="displayRealFeel"
   )
   last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getDailyWeatherData")

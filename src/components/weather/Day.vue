@@ -8,9 +8,6 @@
       .air-temp(:class="airTempStyle") {{ formattedAirTempHi }} / {{ formattedAirTempLow }}
     .precipitation
       .precipitation-probability {{ formattedPrecipitationProbability }}
-    //- .sunrise-sunset
-      .sunrise {{ formattedSunrise }}
-      .sunset {{ formattedSunset }}
 
 </template>
 
@@ -50,12 +47,6 @@ export default {
     },
     formattedTimestamp: function () {
       return this.moment(this.timestamp).format("ddd");
-    },
-    formattedSunrise: function () {
-      return this.moment(this.sunrise).format("h:mm a");
-    },
-    formattedSunset: function () {
-      return this.moment(this.sunset).format("h:mm a");
     },
     realFeelStyle: function () {
       return this.displayRealFeel ? 'show' : 'hide';

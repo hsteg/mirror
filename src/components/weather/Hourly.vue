@@ -5,14 +5,14 @@
     hour.weather-data-row(
       v-else
       v-for="hour in hourlyWeatherData"
-      :key="hour.observation_time.value"
-      :realFeel="hour.feels_like.value"
-      :airTemp="hour.temp.value"
-      :precipitationProbability="hour.precipitation_probability.value"
-      :precipitationType="hour.precipitation_type.value"
-      :sunriseTime="hour.sunrise.value"
-      :timestamp="hour.observation_time.value"
-      :weatherCode="hour.weather_code.value"
+      :key="hour.observationTime"
+      :realFeel="hour.realFeel"
+      :airTemp="hour.airTemp"
+      :precipitationProbability="hour.precipitationProbability"
+      :precipitationType="hour.precipitationType"
+      :sunriseTime="hour.sunrise"
+      :timestamp="hour.observationTime"
+      :weatherCode="hour.weatherCode"
       :displayRealFeel="displayRealFeel"
       )
     last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getHourlyWeatherData")
