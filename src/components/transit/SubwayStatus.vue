@@ -9,7 +9,7 @@
           :key="line"
           :style="{ backgroundColor: status.color }"
         ) {{ line }}
-      p.status {{ status.status }}
+      a.status(:href="status.externalStatusLink" target="blank") {{ status.status }}
     last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getSubwayStatusData")
 </template>
 

@@ -51,6 +51,10 @@ body {
   &.mirror-mode {
     background: black;
     color: white;
+    
+    a {
+      text-decoration: none;
+    }
   }
 }
 </style>
