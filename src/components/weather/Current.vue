@@ -15,17 +15,39 @@
         .primary-temp {{ formattedPrimaryTemp }}
         .secondary-temp {{ formattedSecondaryTemp }}
     .other-conditions
-      p Cloud Cover: {{ currentWeatherData.cloudCover }}
-      p Humidity: {{ currentWeatherData.humidity }}
-      p MoonPhase: {{ currentWeatherData.moonPhase }}
-      p Precipitation: {{ currentWeatherData.precipitationAmount }}
-      p Precipitation Type: {{ currentWeatherData.precipitationType }}
-      p {{ formattedSunrise }}
-      p {{ formattedSunset }}
-      p Wind Gusts: {{ currentWeatherData.windGust }}
-      p Wind Speed: {{ currentWeatherData.windSpeed }}
-      p Wind Direction: {{ currentWeatherData.windDirection }}
-      p Air Quality: {{ currentWeatherData.airQuality }}
+      .current-row
+        span.current-label Cloud Cover: 
+        span.current-value {{ currentWeatherData.cloudCover }}
+      .current-row
+        span.current-label Humidity: 
+        span.current-value {{ currentWeatherData.humidity }}
+      .current-row
+        span.current-label Moon Phase: 
+        span.current-value {{ currentWeatherData.moonPhase }}
+      .current-row
+        span.current-label Precipitation: 
+        span.current-value {{ currentWeatherData.precipitationAmount }}
+      .current-row
+        span.current-label Precipitation Type: 
+        span.current-value {{ currentWeatherData.precipitationType }}
+      .current-row
+        span.current-label Sunrise: 
+        span.current-value {{ formattedSunrise }}
+      .current-row
+        span.current-label Sunset: 
+        span.current-value {{ formattedSunset }}
+      .current-row
+        span.current-label Wind Gusts: 
+        span.current-value {{ currentWeatherData.windGust }}
+      .current-row
+        span.current-label Wind Speed: 
+        span.current-value {{ currentWeatherData.windSpeed }}
+      .current-row
+        span.current-label Wind Direction: 
+        span.current-value {{ currentWeatherData.windDirection }}
+      .current-row
+        span.current-label Air Quality: 
+        span.current-value {{ currentWeatherData.airQuality }}
     last-updated(:lastUpdatedTime="lastUpdated" @fetchData="getWeatherData")
 
 </template>
@@ -68,10 +90,10 @@ export default {
       return this.displayRealFeel ? `Air temp: ${this.currentWeatherData.airTemp}` : `RealFeel: ${this.currentWeatherData.realFeel}`;
     },
     formattedSunrise: function () {
-      return `Sunrise: ${this.moment(this.currentWeatherData.sunrise).format("h:mm a")}` ;
+      return this.moment(this.currentWeatherData.sunrise).format("h:mm a");
     },
     formattedSunset: function () {
-      return `Sunset: ${this.moment(this.currentWeatherData.sunset).format("h:mm a")}` ;
+      return this.moment(this.currentWeatherData.sunset).format("h:mm a");
     }
   },
   methods: {
@@ -122,9 +144,12 @@ export default {
     }
 
     .other-conditions {
-      p {
-        margin: 0;
-        text-align: center;
+      width: 58%;
+
+      .current-row {
+        .current-value {
+          float: right;
+        }
       }
     }
   }
