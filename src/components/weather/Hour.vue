@@ -9,10 +9,10 @@
         :observationTime="timestamp"
       )
     .temperature
-      .real-feel(:class="realFeelStyle") {{ formattedRealFeel }}
-      .air-temp(:class="airTempStyle") {{ formattedAirTemp }}
+      .real-feel(:class="realFeelStyle") {{ realFeel }}
+      .air-temp(:class="airTempStyle") {{ airTemp }}
     .precipitation
-      .precipitation-probability {{ formattedPrecipitationProbability }}
+      .precipitation-probability {{ precipitationProbability }}
       //- maybe make precip type only if precip is present
       //- .precipitation-type {{ formattedPrecipitationType }}
       //- stick code icon in here
@@ -25,9 +25,9 @@ import IconBase from '../icons/IconBase'
 export default {
   name: 'HourWeather',
   props: {
-    realFeel: Number,
-    airTemp: Number,
-    precipitationProbability: Number,
+    realFeel: String,
+    airTemp: String,
+    precipitationProbability: String,
     precipitationType: String,
     timestamp: String,
     weatherCode: String,
@@ -38,15 +38,6 @@ export default {
     'icon-base': IconBase
   },
   computed: {
-    formattedRealFeel: function () {
-      return `${Math.round(this.realFeel)}°`;
-    },
-    formattedAirTemp: function () {
-      return `${Math.round(this.airTemp)}°`;
-    },
-    formattedPrecipitationProbability: function () {
-      return `${Math.round(this.precipitationProbability)}%`
-    },
     formattedPrecipitationType: function () {
       return `Precipitation Type: ${this.precipitationType}` ;
     },

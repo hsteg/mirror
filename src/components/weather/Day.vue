@@ -4,10 +4,10 @@
     .icon
       icon-base(:iconName="weatherCode" :iconColor="'white'")
     .temperature
-      .real-feel(:class="realFeelStyle") {{ formattedRealFeelHi }} / {{ formattedRealFeelLow }}
-      .air-temp(:class="airTempStyle") {{ formattedAirTempHi }} / {{ formattedAirTempLow }}
+      .real-feel(:class="realFeelStyle") {{ realFeelHigh }} / {{ realFeelLow }}
+      .air-temp(:class="airTempStyle") {{ airTempHigh }} / {{ airTempLow }}
     .precipitation
-      .precipitation-probability {{ formattedPrecipitationProbability }}
+      .precipitation-probability {{ precipitationProbability }}
 
 </template>
 
@@ -17,9 +17,11 @@ import IconBase from '../icons/IconBase'
 export default {
   name: 'DayWeather',
   props: {
-    realFeel: Array,
-    airTemp: Array,
-    precipitationProbability: Number,
+    realFeelHigh: String,
+    realFeelLow: String,
+    airTempHigh: String,
+    airTempLow: String,
+    precipitationProbability: String,
     timestamp: String,
     sunrise: String,
     sunset: String,
@@ -30,21 +32,6 @@ export default {
     'icon-base': IconBase
   },
   computed: {
-    formattedRealFeelHi: function () {
-      return `${Math.round(this.realFeel[1].max.value)}°`;
-    },
-    formattedRealFeelLow: function () {
-      return `${Math.round(this.realFeel[0].min.value)}°`;
-    },
-    formattedAirTempHi: function () {
-      return `${Math.round(this.airTemp[1].max.value)}°`;
-    },
-    formattedAirTempLow: function () {
-      return `${Math.round(this.airTemp[0].min.value)}°`;
-    },
-    formattedPrecipitationProbability: function () {
-      return `${Math.round(this.precipitationProbability)}%`
-    },
     formattedTimestamp: function () {
       return this.moment(this.timestamp).format("ddd");
     },

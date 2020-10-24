@@ -6,10 +6,12 @@
     v-else
     v-for="day in dailyWeatherData"
     :key="day.observationTime"
-    :realFeel="day.realFeel"
+    :realFeelHigh="day.realFeelHigh"
+    :realFeelLow="day.realFeelLow"
+    :airTempHigh="day.airTempHigh"
+    :airTempLow="day.airTempLow"
     :timestamp="day.observationTime"
     :precipitationProbability="day.precipitationProbability"
-    :airTemp="day.airTemp"
     :weatherCode="day.weatherCode"
     :displayRealFeel="displayRealFeel"
   )
