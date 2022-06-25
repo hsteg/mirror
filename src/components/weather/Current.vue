@@ -45,10 +45,10 @@
       .current-row
         span.current-label Wind Direction:
         span.current-value {{ currentWeatherData.windDirection }}
-        //- not sure still have AQ info available.
-      //- .current-row
-      //-   span.current-label Air Quality:
-      //-   span.current-value {{ currentWeatherData.airQuality }}
+      .current-row
+        span.current-label Air Quality:
+        span.current-value {{ currentWeatherData.epaHealthConcern }}
+      //- add uv?
 </template>
 
 <script>
