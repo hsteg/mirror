@@ -25,7 +25,7 @@ export default {
     timestamp: String,
     sunrise: String,
     sunset: String,
-    weatherCode: String,
+    weatherCode: Number,
     displayRealFeel: Boolean
   },
   components: {
@@ -59,7 +59,7 @@ export default {
 
       @media (max-width: 767px) {
         width: 110px;
-        
+
         .hide {
           display: none;
         }
@@ -70,9 +70,9 @@ export default {
           width: 110px;
         }
       }
-      
+
       .real-feel {
-        font-size: 26px;  
+        font-size: 26px;
         font-weight: 600;
       }
     }

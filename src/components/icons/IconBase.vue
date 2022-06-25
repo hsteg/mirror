@@ -1,8 +1,8 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" 
-    :width="width" 
-    :height="height" 
-    viewBox="0 0 24 24" 
+  <svg xmlns="http://www.w3.org/2000/svg"
+    :width="width"
+    :height="height"
+    viewBox="0 0 24 24"
     :aria-labelledby="iconName"
   >
     <title :id="iconName" lang="en">{{iconName}}</title>
@@ -20,32 +20,34 @@ export default {
   data() {
     return {
       translator: {
-        "clear_day": "ClearDay",
-        "clear_night": "ClearNight",
-        "cloudy": "Cloudy",
-        "drizzle": "Drizzle",
-        "flurries": "Flurries",
-        "fog": "Fog",
-        "fog_light": "FogLight",
-        "freezing_drizzle": "FreezingDrizzle",
-        "freezing_rain": "FreezingRain",
-        "freezing_rain_heavy": "FreezingRainHeavy",
-        "freezing_rain_light": "FreezingRainLight",
-        "ice_pellets": "IcePellets",
-        "ice_pellets_heavy": "IcePelletsHeavy",
-        "ice_pellets_light": "IcePelletsLight",
-        "mostly_clear_day": "MostlyClearDay",
-        "mostly_clear_night": "MostlyClearNight",
-        "mostly_cloudy": "MostlyCloudy",
-        "partly_cloudy_day": "PartlyCloudyDay", 
-        "partly_cloudy_night": "PartlyCloudyNight",
-        "rain": "Rain",
-        "rain_heavy": "RainHeavy",
-        "rain_light": "RainLight",
-        "snow": "Snow",
-        "snow_light": "SnowLight",
-        "snow_heavy": "SnowHeavy",
-        "tstorm": "TStorm",
+        1000: "ClearDay",
+        10001: "ClearNight",
+        1001: "Cloudy",
+        // 10011 cloudy night?
+        4000: "Drizzle",
+        5001: "Flurries",
+        2000: "Fog",
+        2100: "FogLight",
+        6000: "FreezingDrizzle",
+        6001: "FreezingRain",
+        6201: "FreezingRainHeavy",
+        6200: "FreezingRainLight",
+        7000: "IcePellets",
+        7101: "IcePelletsHeavy",
+        7102: "IcePelletsLight",
+        1100: "MostlyClearDay",
+        11001: "MostlyClearNight",
+        1102: "MostlyCloudy",
+        //11021 mostly cloudy night?
+        1101: "PartlyCloudyDay",
+        11011: "PartlyCloudyNight",
+        4001: "Rain",
+        4201: "RainHeavy",
+        4200: "RainLight",
+        5000: "Snow",
+        5100: "SnowLight",
+        5101: "SnowHeavy",
+        8000: "TStorm",
         "refresh": "Refresh"
       }
     };
@@ -55,17 +57,20 @@ export default {
   },
   computed: {
     formattedIconName: function () {
-      if (this.iconName === 'clear' || this.iconName === 'mostly_clear' || this.iconName === 'partly_cloudy') {
-        if (this.isBeforeSunrise) {
-          const withTime = `${this.iconName}_night`
-          return `${this.translator[withTime]}`;
-        } else {
-          const withTime = `${this.iconName}_day`
-          return `${this.translator[withTime]}`;
-        }
-      } else {
-        return `${this.translator[this.iconName]}`;
-      }
+      // const nightConditions = [1000, 1100, 1104]
+
+      // if (nightConditions.includes(this.iconName)) {
+      //   if (this.isBeforeSunrise) {
+      //     const withTime = `${this.iconName}_night`
+      //     return `${this.translator[withTime]}`;
+      //   } else {
+      //     return `${this.translator[this.iconName]}`;
+      //   }
+      // } else {
+      //   return `${this.translator[this.iconName]}`;
+      // }
+      // rethink this logic
+      return `${this.translator[this.iconName]}`;
     },
     timeNow: function () {
       return this.moment().toISOString();
@@ -76,8 +81,8 @@ export default {
   },
   props: {
     iconName: {
-      type: String,
-      default: 'box'
+      type: [Number, String],
+      default: 1000
     },
     width: {
       type: [Number, String],

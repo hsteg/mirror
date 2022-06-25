@@ -1,7 +1,7 @@
 <template lang="pug">
   .hour
     .timestamp {{ formattedTimestamp }}
-    .icon 
+    .icon
       icon-base(
         :iconName="weatherCode"
         :iconColor="'white'"
@@ -30,7 +30,7 @@ export default {
     precipitationProbability: String,
     precipitationType: String,
     timestamp: String,
-    weatherCode: String,
+    weatherCode: Number,
     displayRealFeel: Boolean,
     sunriseTime: String
   },
