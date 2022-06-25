@@ -119,7 +119,11 @@ export default {
     }
 
     .other-conditions {
-      width: 70%;
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+
+      width: 75%;
 
       .current-row {
         .current-value {
