@@ -16,12 +16,10 @@
     :displayRealFeel="displayRealFeel"
   )
   last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getDailyWeatherData")
-  
+
 </template>
 
 <script>
-import client from '../../services/httpClient';
-import { autoUpdate } from '../../mixins/autoUpdate';
 import Loading from '../Loading';
 import Day from './Day';
 import LastUpdated from '../LastUpdated';
@@ -33,35 +31,20 @@ export default {
     'day': Day,
     'last-updated': LastUpdated
   },
-  mixins: [ autoUpdate ],
   props: {
-    displayRealFeel: Boolean
+    displayRealFeel: Boolean,
+    dailyWeatherData: Array
   },
   data() {
     return {
       isLoading: false,
-      lastUpdated: '',
-      dailyWeatherData: []
+      lastUpdated: ''
     }
   },
-  created() {
-    this.getDailyWeatherData();
-    // every hour
-    this.setAutoUpdate(this.getDailyWeatherData, 3600);
-  },
-  methods: {
-    async getDailyWeatherData() {
-      this.isLoading = true;
-      client.getWeatherDaily().then( data => {
-        this.isLoading = false;
-        this.dailyWeatherData = data;
-        this.lastUpdated = this.moment();
-      })
-    }
-  }
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-  
+
 </style>

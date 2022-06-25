@@ -2,9 +2,9 @@
   #weather
     .temp-selector(@click="toggleTempDisplay") {{ formattedTempDisplay }} temp shown, click to toggle
     .weather-main
-      current-weather(:displayRealFeel="displayRealFeel")
-      hourly-weather(:displayRealFeel="displayRealFeel")
-      daily-weather(:displayRealFeel="displayRealFeel")
+      current-weather(:displayRealFeel="displayRealFeel" :currentWeatherData="weatherData.currentWeather")
+      hourly-weather(:displayRealFeel="displayRealFeel" :hourlyWeatherData="weatherData.hourlyWeather")
+      daily-weather(:displayRealFeel="displayRealFeel" :dailyWeatherData="weatherData.dailyWeather")
 </template>
 
 <script>
@@ -12,6 +12,7 @@ import Loading from '../Loading';
 import CurrentWeather from './Current';
 import Hourly from './Hourly';
 import Daily from './Daily';
+import client from '../../services/httpClient';
 
 
 
@@ -26,8 +27,13 @@ export default {
   },
   data() {
     return {
-      displayRealFeel: true
+      displayRealFeel: true,
+      isLoading: false,
+      weatherData: {}
     };
+  },
+  created() {
+    this.getWeatherData();
   },
   computed: {
     formattedTempDisplay: function () {
@@ -37,6 +43,14 @@ export default {
   methods: {
     toggleTempDisplay() {
       this.displayRealFeel = !this.displayRealFeel;
+    },
+    getWeatherData() {
+      this.isLoading = true;
+      client.getWeather().then(data => {
+        this.isLoading = false;
+        this.weatherData = data;
+        this.lastUpdated = this.moment();
+      })
     }
   }
 }
@@ -64,9 +78,9 @@ export default {
       min-height: 434px;
 
       @media (max-width: 767px) {
-        display: flex;    
+        display: flex;
         flex-direction: column;
       }
     }
   }
-</style> 
+</style>

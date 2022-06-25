@@ -2,18 +2,9 @@ import axios from 'axios';
 
 export default {
   async getWeather() {
-    // let res = await axios.get('http://192.168.1.180:8000/weatherNow');
-    let res = await axios.get('https://funmirror-server.herokuapp.com/weatherNow');
-    return res.data;
-  },
-  async getWeatherHourly() {
-    // let res = await axios.get('http://192.168.1.180:8000/weatherHourly');
-    let res = await axios.get('https://funmirror-server.herokuapp.com/weatherHourly');
-    return res.data;
-  },
-  async getWeatherDaily() {
-    // let res = await axios.get('http://192.168.1.180:8000/weatherDaily');
-    let res = await axios.get('https://funmirror-server.herokuapp.com/weatherDaily');
+    let res = await axios.get('https://funmirror-server.herokuapp.com/weather');
+    // let res = await axios.get('http://localhost:8000/weather');
+
     return res.data;
   },
   async getTransit() {

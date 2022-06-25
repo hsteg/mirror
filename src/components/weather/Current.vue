@@ -10,51 +10,50 @@
           :iconColor="'white'"
           :width="150"
           :height="150"
-        ) 
+        )
       .temperature
         .primary-temp {{ formattedPrimaryTemp }}
         .secondary-temp {{ formattedSecondaryTemp }}
     .other-conditions
       .current-row
-        span.current-label Cloud Cover: 
+        span.current-label Cloud Cover:
         span.current-value {{ currentWeatherData.cloudCover }}
       .current-row
-        span.current-label Humidity: 
+        span.current-label Humidity:
         span.current-value {{ currentWeatherData.humidity }}
       .current-row
-        span.current-label Moon Phase: 
+        span.current-label Moon Phase:
         span.current-value {{ currentWeatherData.moonPhase }}
       .current-row
-        span.current-label Precipitation: 
+        span.current-label Precipitation:
         span.current-value {{ currentWeatherData.precipitationAmount }}
       .current-row
-        span.current-label Precipitation Type: 
+        span.current-label Precipitation Type:
         span.current-value {{ currentWeatherData.precipitationType }}
       .current-row
-        span.current-label Sunrise: 
+        span.current-label Sunrise:
         span.current-value {{ formattedSunrise }}
       .current-row
-        span.current-label Sunset: 
+        span.current-label Sunset:
         span.current-value {{ formattedSunset }}
       .current-row
-        span.current-label Wind Gusts: 
+        span.current-label Wind Gusts:
         span.current-value {{ currentWeatherData.windGust }}
       .current-row
-        span.current-label Wind Speed: 
+        span.current-label Wind Speed:
         span.current-value {{ currentWeatherData.windSpeed }}
       .current-row
-        span.current-label Wind Direction: 
+        span.current-label Wind Direction:
         span.current-value {{ currentWeatherData.windDirection }}
-      .current-row
-        span.current-label Air Quality: 
-        span.current-value {{ currentWeatherData.airQuality }}
+        //- not sure still have AQ info available.
+      //- .current-row
+      //-   span.current-label Air Quality:
+      //-   span.current-value {{ currentWeatherData.airQuality }}
     last-updated(:lastUpdatedTime="lastUpdated" @fetchData="getWeatherData")
 
 </template>
 
 <script>
-import client from '../../services/httpClient';
-import { autoUpdate } from '../../mixins/autoUpdate';
 import Loading from '../Loading';
 import IconBase from '../icons/IconBase';
 import LastUpdated from '../LastUpdated';
@@ -66,22 +65,16 @@ export default {
     'icon-base': IconBase,
     'last-updated': LastUpdated
   },
-  mixins: [ autoUpdate ],
   props: {
-    displayRealFeel: Boolean
+    displayRealFeel: Boolean,
+    currentWeatherData: Object
   },
   data() {
     return {
-      currentWeatherData: {},
       isLoading: false,
       lastUpdated: ''
     };
   },
-  created() {
-    this.getWeatherData();
-    // every 2 min
-    this.setAutoUpdate(this.getWeatherData, 120);
-  }, 
   computed: {
     formattedPrimaryTemp: function () {
       return this.displayRealFeel ? this.currentWeatherData.realFeel : this.currentWeatherData.airTemp;
@@ -96,16 +89,7 @@ export default {
       return this.moment(this.currentWeatherData.sunset).format("h:mm a");
     }
   },
-  methods: {
-    async getWeatherData() {
-      this.isLoading = true;
-      client.getWeather().then( data => {
-        this.isLoading = false;
-        this.currentWeatherData = data;
-        this.lastUpdated = this.moment();
-      })
-    }
-  }
+  methods: {}
 }
 </script>
 
@@ -116,7 +100,7 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     margin-top: -15px;
-    
+
     .primary-conditions {
       display: flex;
       align-items: center;
@@ -132,7 +116,7 @@ export default {
           font-weight: bold;
           text-align: center;
         }
-  
+
         .secondary-temp {
           font-size: 16px;
           text-align: center;

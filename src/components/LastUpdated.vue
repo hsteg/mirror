@@ -20,6 +20,7 @@ export default {
   },
   props: {
     lastUpdatedTime: Object
+    // last updated time is now in current start time
   },
   computed: {
     ...mapGetters(['autoUpdate']),
