@@ -49,31 +49,22 @@
       //- .current-row
       //-   span.current-label Air Quality:
       //-   span.current-value {{ currentWeatherData.airQuality }}
-    last-updated(:lastUpdatedTime="lastUpdated" @fetchData="getWeatherData")
-
 </template>
 
 <script>
 import Loading from '../Loading';
 import IconBase from '../icons/IconBase';
-import LastUpdated from '../LastUpdated';
 
 export default {
   name: 'CurrentWeather',
   components: {
     'loading': Loading,
-    'icon-base': IconBase,
-    'last-updated': LastUpdated
+    'icon-base': IconBase
   },
   props: {
     displayRealFeel: Boolean,
-    currentWeatherData: Object
-  },
-  data() {
-    return {
-      isLoading: false,
-      lastUpdated: ''
-    };
+    currentWeatherData: Object,
+    isLoading: Boolean
   },
   computed: {
     formattedPrimaryTemp: function () {
@@ -128,7 +119,7 @@ export default {
     }
 
     .other-conditions {
-      width: 58%;
+      width: 70%;
 
       .current-row {
         .current-value {

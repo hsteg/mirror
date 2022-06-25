@@ -15,37 +15,27 @@
       :weatherCode="hour.weatherCode"
       :displayRealFeel="displayRealFeel"
       )
-    last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getHourlyWeatherData")
 </template>
 
 <script>
 import Loading from '../Loading';
 import Hour from './Hour';
-import LastUpdated from '../LastUpdated';
 
 export default {
   name: 'HourlyWeather',
   components: {
     'loading': Loading,
-    'hour': Hour,
-    'last-updated': LastUpdated
+    'hour': Hour
   },
   props: {
     displayRealFeel: Boolean,
-    hourlyWeatherData: Array
-  },
-  data() {
-    return {
-      isLoading: false,
-      lastUpdated: ''
-    }
+    hourlyWeatherData: Array,
+    isLoading: Boolean
   },
   computed: {},
-  methods: {
-  },
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

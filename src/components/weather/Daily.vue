@@ -15,36 +15,26 @@
     :weatherCode="day.weatherCode"
     :displayRealFeel="displayRealFeel"
   )
-  last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getDailyWeatherData")
-
 </template>
 
 <script>
 import Loading from '../Loading';
 import Day from './Day';
-import LastUpdated from '../LastUpdated';
 
 export default {
   name: "DailyWeather",
   components: {
     'loading': Loading,
-    'day': Day,
-    'last-updated': LastUpdated
+    'day': Day
   },
   props: {
     displayRealFeel: Boolean,
-    dailyWeatherData: Array
-  },
-  data() {
-    return {
-      isLoading: false,
-      lastUpdated: ''
-    }
+    dailyWeatherData: Array,
+    isLoading: Boolean
   },
   methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

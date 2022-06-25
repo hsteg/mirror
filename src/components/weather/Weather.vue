@@ -2,13 +2,24 @@
   #weather
     .temp-selector(@click="toggleTempDisplay") {{ formattedTempDisplay }} temp shown, click to toggle
     .weather-main
-      current-weather(:displayRealFeel="displayRealFeel" :currentWeatherData="weatherData.currentWeather")
-      hourly-weather(:displayRealFeel="displayRealFeel" :hourlyWeatherData="weatherData.hourlyWeather")
-      daily-weather(:displayRealFeel="displayRealFeel" :dailyWeatherData="weatherData.dailyWeather")
+      current-weather(
+        :isLoading="isLoading"
+        :displayRealFeel="displayRealFeel"
+        :currentWeatherData="weatherData.currentWeather"
+      )
+      hourly-weather(
+        :isLoading="isLoading"
+        :displayRealFeel="displayRealFeel"
+        :hourlyWeatherData="weatherData.hourlyWeather"
+      )
+      daily-weather(
+        :isLoading="isLoading"
+        :displayRealFeel="displayRealFeel"
+        :dailyWeatherData="weatherData.dailyWeather"
+      )
 </template>
 
 <script>
-import Loading from '../Loading';
 import CurrentWeather from './Current';
 import Hourly from './Hourly';
 import Daily from './Daily';
@@ -20,7 +31,6 @@ export default {
   name: 'Weather',
   props: {},
   components: {
-    'loading': Loading,
     'current-weather': CurrentWeather,
     'hourly-weather': Hourly,
     'daily-weather': Daily
