@@ -55,7 +55,7 @@ export default {
 
   .subway-status {
     .transit-data-row {
-      align-items: baseline;
+      align-items: center;
 
       .lines {
         display: flex;
@@ -67,6 +67,7 @@ export default {
 
       .status {
         margin: 0;
+        text-align: right;
       }
     }
   }
