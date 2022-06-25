@@ -6,6 +6,7 @@
         :iconName="weatherCode"
         :iconColor="'white'"
         :sunriseTime="sunriseTime"
+        :sunsetTime="sunsetTime"
         :observationTime="timestamp"
       )
     .temperature
@@ -32,7 +33,8 @@ export default {
     timestamp: String,
     weatherCode: Number,
     displayRealFeel: Boolean,
-    sunriseTime: String
+    sunriseTime: String,
+    sunsetTime: String
   },
   components: {
     'icon-base': IconBase

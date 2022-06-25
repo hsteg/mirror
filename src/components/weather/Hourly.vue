@@ -11,6 +11,7 @@
       :precipitationProbability="hour.precipitationProbability"
       :precipitationType="hour.precipitationType"
       :sunriseTime="hour.sunrise"
+      :sunsetTime="hour.sunset"
       :timestamp="hour.observationTime"
       :weatherCode="hour.weatherCode"
       :displayRealFeel="displayRealFeel"

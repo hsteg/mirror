@@ -23,7 +23,6 @@ export default {
         1000: "ClearDay",
         10001: "ClearNight",
         1001: "Cloudy",
-        // 10011 cloudy night?
         4000: "Drizzle",
         5001: "Flurries",
         2000: "Fog",
@@ -38,7 +37,6 @@ export default {
         1100: "MostlyClearDay",
         11001: "MostlyClearNight",
         1102: "MostlyCloudy",
-        //11021 mostly cloudy night?
         1101: "PartlyCloudyDay",
         11011: "PartlyCloudyNight",
         4001: "Rain",
@@ -57,26 +55,22 @@ export default {
   },
   computed: {
     formattedIconName: function () {
-      // const nightConditions = [1000, 1100, 1104]
+      const nightConditions = [1000, 1100, 1104]
 
-      // if (nightConditions.includes(this.iconName)) {
-      //   if (this.isBeforeSunrise) {
-      //     const withTime = `${this.iconName}_night`
-      //     return `${this.translator[withTime]}`;
-      //   } else {
-      //     return `${this.translator[this.iconName]}`;
-      //   }
-      // } else {
-      //   return `${this.translator[this.iconName]}`;
-      // }
-      // rethink this logic
-      return `${this.translator[this.iconName]}`;
-    },
-    timeNow: function () {
-      return this.moment().toISOString();
+      if (this.displayNightIcon && nightConditions.includes(this.iconName)) {
+        return `${this.translator[parseInt(`${this.iconName}1`)]}`;
+      } else {
+        return `${this.translator[this.iconName]}`;
+      }
     },
     isBeforeSunrise: function () {
-      return !!this.sunriseTime && (this.observationTime < this.sunriseTime);
+      return new Date(this.observationTime) < new Date(this.sunriseTime);
+    },
+    isAfterSunset: function () {
+      return new Date(this.observationTime) > new Date(this.sunsetTime);
+    },
+    displayNightIcon: function () {
+      return this.isBeforeSunrise || this.isAfterSunset;
     }
   },
   props: {
@@ -97,6 +91,10 @@ export default {
       default: 'currentColor'
     },
     sunriseTime: {
+      type: String,
+      default: null
+    },
+    sunsetTime: {
       type: String,
       default: null
     },

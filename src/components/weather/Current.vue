@@ -7,6 +7,7 @@
           :iconName="currentWeatherData.weatherCode"
           :observationTime="currentWeatherData.observationTime"
           :sunriseTime="currentWeatherData.sunrise"
+          :sunsetTime="currentWeatherData.sunset"
           :iconColor="'white'"
           :width="150"
           :height="150"
