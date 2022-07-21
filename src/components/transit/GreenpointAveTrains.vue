@@ -5,9 +5,9 @@
     .transit-data-row(v-else v-for="departure in departureTimes" :key="departure.time + departure.destinationStationId")
       .destination-station
         p.subway-line G
-        h2.station-name {{ departure.destinationStation }} 
+        h2.station-name {{ departure.destinationStation }}
       .arrival-time
-        h2.number-min {{ timeDifferenceInMin(departure.time) }}
+        h2.number-min {{ departure.readableTime }}
         p.min min
     last-updated(v-if="!isLoading" :lastUpdatedTime="lastUpdated" @fetchData="getTransitData")
 </template>
@@ -44,13 +44,6 @@ export default {
         this.departureTimes = data;
         this.lastUpdated = this.moment();
       });
-    },
-    timeDifferenceInMin(departure) {
-      const nowTime = new Date(Date.now()).getTime();
-      const departureTime = new Date(departure * 1000).getTime();
-      const difference = ( ( (departureTime - nowTime) / 1000) / 60);
-      const rounded = Math.round(difference);
-      return rounded;
     }
   }
 }
@@ -62,7 +55,7 @@ export default {
       .destination-station {
         display: flex;
         align-items: center;
-        
+
         .subway-line {
           margin: 0 5px 0 0;
           background-color: #6CBE45;
@@ -71,7 +64,7 @@ export default {
           font-size: 28px;
         }
       }
-      
+
       .arrival-time {
         .number-min {
           font-size: 28px;
