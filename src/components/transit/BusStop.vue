@@ -1,14 +1,14 @@
 <template lang="pug">
   .bus-stop
-    h2.stop-name {{ busStop.name }}
+    a.stop-name(:href="'https://bustime.mta.info/m/?q=B62'" target="blank") {{ busStop.name }}
     p.no-buses(v-if="noStopData && !busStop.isLoading") No buses en-route
     loading(v-if="busStop.isLoading")
     .transit-data-row(v-else v-for="arrival in busStop.data" :key="arrival.expectedArrivalTime")
-      .distance 
-        h2.number {{ arrival.readableDistanceNumber }} 
+      .distance
+        h2.number {{ arrival.readableDistanceNumber }}
         p.units {{ arrival.readableDistanceUnits }}
-      .arrival-time 
-        h2.number-min {{ -1 * (moment().diff(arrival.expectedArrivalTime, 'minutes')) }} 
+      .arrival-time
+        h2.number-min {{ -1 * (moment().diff(arrival.expectedArrivalTime, 'minutes')) }}
         p.min min
     last-updated(v-if="!busStop.isLoading" :lastUpdatedTime="busStop.lastUpdated" @fetchData="fetchBusData")
 </template>
@@ -58,6 +58,8 @@ export default {
       margin-bottom: 5px;
       margin-top: 0;
       display: block;
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
     .transit-data-row {
@@ -74,7 +76,7 @@ export default {
         .number-min {
           font-size: 28px;
         }
-        
+
         .min {
           margin: 0;
         }
